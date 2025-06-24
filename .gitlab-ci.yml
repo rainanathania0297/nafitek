@@ -55,7 +55,7 @@ build-production:
     - v1
 
 .script-deploy: &script-deploy
-  - ln -sfT $(pwd)/dist ~/dist
+  - ln -sfT $(pwd)/.output/public ~/dist
   - ansible-playbook ~/playbook/app/company-profile-v1.yml -i ~/inventory
 
 deploy-production:
