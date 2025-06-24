@@ -122,9 +122,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Decorative Elements -->
-    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-golden"></div>
   </footer>
 </template>
 
