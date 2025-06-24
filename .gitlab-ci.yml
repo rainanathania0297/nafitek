@@ -1,0 +1,66 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  # BRANCH_TAG : $CI_COMMIT_BRANCH
+  BRANCH_TAG: production
+
+.variable-production:
+  variables:
+    SERVER_USER: $PRODUCTION_SERVER_USER
+
+.template-build:
+  stage: build
+  tags:
+    - nafitek-runner-build
+  image: node:20
+  cache:
+    paths:
+      - node_modules
+  script:
+    - npm install --progress=false
+    - npm run generate
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+
+build-production:
+  extends: 
+    - .template-build
+    - .variable-production  # Inherit live variables
+  only:
+    - production
+    - v1
+
+.template-deploy:
+  stage: deploy
+  image: registry.gitlab.com/nafitek-global/ansible:$BRANCH_TAG
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$RUNNER_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 400 ~/.ssh/id_rsa
+    - echo "$RUNNER_PUBLIC_KEY" > ~/.ssh/id_rsa.pub
+    - chmod 400 ~/.ssh/id_rsa.pub
+
+.template-deploy-production:
+  extends:
+    - .template-deploy
+    - .variable-production
+  tags:
+    - nafitek-runner-deploy
+  only:
+    - production
+    - v1
+
+.script-deploy: &script-deploy
+  - ln -sfT $(pwd)/dist ~/dist
+  - ansible-playbook ~/playbook/app/company-profile-v1.yml -i ~/inventory
+
+deploy-production:
+  extends:
+    - .template-deploy-production
+  script:
+    - *script-deploy
+
