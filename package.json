@@ -1,10 +1,10 @@
 {
-  "name": "nuxt-app",
+  "name": "nafitek-global-website",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host 0.0.0.0 --port 12000",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -16,11 +16,23 @@
     "@nuxt/icon": "^1.14.0",
     "@nuxt/image": "^1.10.0",
     "@nuxt/scripts": "^0.11.8",
+    "@nuxtjs/tailwindcss": "^6.12.1",
     "@unhead/vue": "^2.0.10",
+    "@vueuse/core": "^11.2.0",
+    "@vueuse/nuxt": "^11.2.0",
     "better-sqlite3": "^11.10.0",
     "eslint": "^9.29.0",
+    "framer-motion": "^11.11.17",
+    "gsap": "^3.12.5",
     "nuxt": "^3.17.5",
+    "swiper": "^11.1.14",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.14"
   }
 }
