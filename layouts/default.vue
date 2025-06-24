@@ -1,10 +1,13 @@
 <template>
   <div class="min-h-screen bg-charcoal">
+    <!-- Accessibility Skip Links -->
+    <AccessibilitySkipLink />
+    
     <!-- Navigation -->
-    <AppNavigation />
+    <AppNavigation id="navigation" />
     
     <!-- Main Content -->
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     

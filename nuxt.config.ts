@@ -57,11 +57,52 @@ export default defineNuxtConfig({
       lg: 1024,
       xl: 1280,
       xxl: 1536
+    },
+    presets: {
+      hero: {
+        modifiers: {
+          format: 'webp',
+          quality: 85,
+          width: 1920,
+          height: 1080
+        }
+      },
+      thumbnail: {
+        modifiers: {
+          format: 'webp',
+          quality: 75,
+          width: 400,
+          height: 300
+        }
+      }
     }
   },
 
   nitro: {
-    preset: 'static'
+    preset: 'static',
+    prerender: {
+      routes: [
+        '/',
+        '/about',
+        '/services',
+        '/portfolio',
+        '/blog',
+        '/contact',
+        '/sitemap',
+        '/privacy',
+        '/terms'
+      ]
+    }
+  },
+
+  experimental: {
+    payloadExtraction: false
+  },
+
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://nafitekglobalindonesia.com'
+    }
   },
 
   vite: {

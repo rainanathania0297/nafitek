@@ -88,6 +88,10 @@
     <div class="absolute bottom-10 right-10 w-20 h-20 opacity-20 animate-rotate-gear">
       <Icon name="mdi:cog" class="w-full h-full text-golden" />
     </div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-golden"></div>
+    
   </section>
 </template>
 
