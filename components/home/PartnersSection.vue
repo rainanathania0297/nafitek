@@ -27,7 +27,7 @@
             class="group"
           >
             <div 
-              class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 transition-all duration-500 hover:border-golden hover:bg-white/20 hover:scale-105 animate-fade-in-up"
+              class="h-full bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 transition-all duration-500 hover:border-golden hover:bg-white/20 hover:scale-105 animate-fade-in-up"
               :style="{ animationDelay: `${index * 0.1}s` }"
             >
               <!-- Partner Logo -->
