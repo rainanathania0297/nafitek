@@ -175,7 +175,7 @@
             class="flex items-center justify-center p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-golden transition-all duration-300 hover:scale-105">
               <template v-if="partner.logo">
                 <NuxtImg
-                  :preset="partner.logo.includes('svg') ? null : 'brand'"
+                  :preset="partner.logo.includes('.svg') ? undefined : 'brand'"
                   :src="partner.logo"
                   :alt="partner.name"
                   class="w-auto filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"

@@ -35,7 +35,7 @@
                 <div class="text-4xl font-bold text-white group-hover:text-golden transition-colors duration-300">
                   <template v-if="partner.logo">
                     <NuxtImg
-                      :preset="partner.logo.includes('svg') ? null : 'brand'"
+                      :preset="partner.logo.includes('.svg') ? undefined : 'brand'"
                       :src="partner.logo"
                       :alt="partner.name"
                       class="w-auto filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
@@ -93,7 +93,7 @@
               <div class="text-center">
                 <template v-if="partner.logo">
                   <NuxtImg
-                    :preset="partner.logo.includes('svg') ? null : 'brand'"
+                    :preset="partner.logo.includes('.svg') ? undefined : 'brand'"
                     :src="partner.logo"
                     :alt="partner.name"
                     class="w-auto filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
