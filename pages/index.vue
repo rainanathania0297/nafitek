@@ -1,35 +1,39 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <HeroSection />
+    <HomeHeroSection />
     
     <!-- About Us Section -->
-    <AboutSection />
+    <HomeAboutSection />
     
     <!-- Our Strengths Section -->
-    <StrengthsSection />
+    <HomeStrengthsSection />
     
     <!-- Services Section -->
-    <ServicesSection />
+    <HomeServicesSection />
     
     <!-- Partner Brands Section -->
-    <PartnersSection />
+    <HomePartnersSection />
     
     <!-- Process Timeline Section -->
-    <ProcessSection />
+    <HomeProcessSection />
     
     <!-- Testimonials & Metrics Section -->
-    <TestimonialsSection />
+    <HomeTestimonialsSection />
     
-    <!-- Portfolio Gallery Section -->
-    <PortfolioSection />
+    <!-- Portofolio Gallery Section -->
+    <HomePortofolioSection />
     
     <!-- CTA Section -->
-    <CTASection />
+    <HomeCTASection />
   </div>
 </template>
 
 <script setup>
+// stores
+const companyStore = useCompanyStore();
+await callOnce('company-data', () => companyStore.loadData())
+
 // SEO Meta
 useHead({
   title: 'PT Nafitek Global Indonesia - Industrial Services & Machinery Solutions',

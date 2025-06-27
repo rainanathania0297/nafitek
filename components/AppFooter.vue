@@ -133,7 +133,7 @@ const currentYear = computed(() => new Date().getFullYear())
 const quickLinks = [
   { name: 'About Us', href: '/about' },
   { name: 'Our Services', href: '/services' },
-  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Portofolio', href: '/portofolio' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
   { name: 'Get Quote', href: '/contact' }

@@ -8,7 +8,7 @@
       <!-- Section Header -->
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-montserrat font-bold text-white mb-6">
-          Our <span class="text-gradient">Portfolio</span>
+          Our <span class="text-gradient">Portofolio</span>
         </h2>
         <div class="w-24 h-1 bg-golden mx-auto mb-6"></div>
         <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -33,7 +33,7 @@
         </button>
       </div>
 
-      <!-- Portfolio Grid -->
+      <!-- Portofolio Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         <div
           v-for="(project, index) in filteredProjects"
@@ -64,12 +64,12 @@
               <span 
                 class="px-3 py-1 text-xs font-semibold rounded-full"
                 :class="[
-                  project.status === 'Completed' 
+                  project.project_status === 'completed' 
                     ? 'bg-green-500/20 text-green-400 border border-green-500/30'
                     : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                 ]"
               >
-                {{ project.status }}
+                {{ project.project_status }}
               </span>
             </div>
           </div>
@@ -83,17 +83,17 @@
 
             <!-- Description -->
             <p class="text-gray-300 text-sm leading-relaxed mb-4">
-              {{ project.description }}
+              {{ project.project_solution }}
             </p>
 
             <!-- Technologies/Services -->
-            <div class="flex flex-wrap gap-2 mb-4">
+            <div class="flex flex-wrap gap-2 mb-4 max-h-24 overflow-y-hidden">
               <span
-                v-for="tech in project.technologies"
-                :key="tech"
+                v-for="tag in project.tags"
+                :key="tag"
                 class="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded border border-gray-600"
               >
-                {{ tech }}
+                {{ tag }}
               </span>
             </div>
 
@@ -101,21 +101,22 @@
             <div class="flex items-center justify-between text-sm text-gray-400 mb-4">
               <div class="flex items-center">
                 <Icon name="mdi:calendar" class="w-4 h-4 mr-1" />
-                <span>{{ project.year }}</span>
+                <span>{{ project.date.getFullYear() }}</span>
               </div>
               <div class="flex items-center">
                 <Icon name="mdi:map-marker" class="w-4 h-4 mr-1" />
-                <span>{{ project.location }}</span>
+                <span>{{ project.project_location }}</span>
               </div>
             </div>
 
             <!-- View Details Button -->
-            <button
-              @click="openProjectModal(project)"
-              class="w-full bg-gray-700 hover:bg-golden text-white hover:text-charcoal py-2 px-4 rounded-lg transition-all duration-300 font-medium"
-            >
-              View Details
-            </button>
+            <NuxtLink :to="project.path">
+              <button
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-golden hover:text-charcoal transition-all duration-300 font-medium"
+              >
+                View Details
+              </button>
+            </NuxtLink>
           </div>
 
           <!-- Hover Overlay -->
@@ -148,9 +149,9 @@
               <Icon name="mdi:rocket-launch" class="w-5 h-5 mr-2" />
               Start Your Project
             </NuxtLink>
-            <NuxtLink to="/portfolio" class="btn-secondary">
+            <NuxtLink to="/portofolio" class="btn-secondary">
               <Icon name="mdi:view-grid" class="w-5 h-5 mr-2" />
-              View Full Portfolio
+              View Full Portofolio
             </NuxtLink>
           </div>
         </div>
@@ -169,135 +170,35 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+const portofolioStore = usePortofolioStore();
+await callOnce("portofolio-data", () => portofolioStore.loadData());
+
 const activeCategory = ref('All')
 const selectedProject = ref(null)
 const displayedProjects = ref(6)
 
-const categories = ['All', 'Maintenance', 'Automation', 'Special Machines', 'Component Supply', 'Distribution']
+// Categories
+const categories = computed(() => {
+  return ["All", ...portofolioStore.categoryList];
+});
 
-const projects = [
-  {
-    id: 1,
-    title: 'Vacuum Pump Overhaul - Electronics Manufacturing',
-    category: 'Maintenance',
-    description: 'Complete overhaul and optimization of Pfeiffer vacuum pump systems for semiconductor production line.',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Pfeiffer Pumps', 'Leak Testing', 'Performance Optimization'],
-    year: '2024',
-    location: 'Jakarta',
-    status: 'Completed',
-    details: {
-      client: 'PT Elektronik Nusantara',
-      duration: '3 weeks',
-      challenge: 'Critical vacuum pump failure affecting production efficiency',
-      solution: 'Complete pump overhaul with upgraded components and preventive maintenance program',
-      results: ['99.5% uptime improvement', '30% energy efficiency gain', 'Zero unplanned downtime']
-    }
-  },
-  {
-    id: 2,
-    title: 'Automated Quality Control System',
-    category: 'Automation',
-    description: 'Implementation of PLC-based quality control system with Andon integration for automotive parts manufacturing.',
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['PLC Programming', 'Andon System', 'HMI Interface'],
-    year: '2024',
-    location: 'Bekasi',
-    status: 'Completed',
-    details: {
-      client: 'PT Otomotif Prima',
-      duration: '6 weeks',
-      challenge: 'Manual quality control causing production bottlenecks',
-      solution: 'Automated inspection system with real-time monitoring and alerts',
-      results: ['50% faster inspection process', '95% defect detection accuracy', 'Real-time production visibility']
-    }
-  },
-  {
-    id: 3,
-    title: 'Custom Assembly Line Machine',
-    category: 'Special Machines',
-    description: 'Design and manufacturing of specialized assembly machine for precision electronic components.',
-    image: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Custom Design', 'Precision Assembly', 'Vision System'],
-    year: '2023',
-    location: 'Tangerang',
-    status: 'Completed',
-    details: {
-      client: 'PT Precision Manufacturing',
-      duration: '8 weeks',
-      challenge: 'Need for high-precision assembly with consistent quality',
-      solution: 'Custom-designed machine with vision-guided assembly and quality verification',
-      results: ['99.8% assembly accuracy', '3x faster production speed', 'Consistent quality output']
-    }
-  },
-  {
-    id: 4,
-    title: 'Industrial Component Supply Program',
-    category: 'Component Supply',
-    description: 'Comprehensive spare parts supply and inventory management for chemical processing plant.',
-    image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Inventory Management', 'Genuine Parts', 'Logistics'],
-    year: '2023',
-    location: 'Cilegon',
-    status: 'Ongoing',
-    details: {
-      client: 'PT Kimia Industri',
-      duration: 'Ongoing',
-      challenge: 'Critical spare parts availability and inventory optimization',
-      solution: 'Comprehensive supply program with predictive maintenance scheduling',
-      results: ['40% reduction in inventory costs', '99% parts availability', '24/7 emergency support']
-    }
-  },
-  {
-    id: 5,
-    title: 'Atlas Copco Vacuum System Installation',
-    category: 'Distribution',
-    description: 'Installation and commissioning of Atlas Copco vacuum system for pharmaceutical manufacturing.',
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Atlas Copco', 'System Integration', 'Commissioning'],
-    year: '2023',
-    location: 'Bandung',
-    status: 'Completed',
-    details: {
-      client: 'PT Farmasi Nusantara',
-      duration: '4 weeks',
-      challenge: 'Stringent pharmaceutical industry requirements for vacuum systems',
-      solution: 'Complete Atlas Copco vacuum system with validation and documentation',
-      results: ['FDA compliance achieved', 'Validated system performance', 'Complete documentation package']
-    }
-  },
-  {
-    id: 6,
-    title: 'Motor Rewinding & Repair Service',
-    category: 'Maintenance',
-    description: 'Emergency motor rewinding service for critical production equipment in textile manufacturing.',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Motor Rewinding', 'Emergency Service', 'Performance Testing'],
-    year: '2024',
-    location: 'Surabaya',
-    status: 'Completed',
-    details: {
-      client: 'PT Tekstil Indonesia',
-      duration: '1 week',
-      challenge: 'Critical motor failure during peak production period',
-      solution: 'Emergency rewinding service with upgraded insulation and testing',
-      results: ['48-hour emergency response', '20% efficiency improvement', 'Extended motor lifespan']
-    }
-  }
-]
+// Projects
+const projectList = computed(() => {
+  return portofolioStore.portofolioList;
+});
 
 const filteredProjects = computed(() => {
   const filtered = activeCategory.value === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === activeCategory.value)
+    ? projectList.value 
+    : projectList.value.filter(project => project.category === activeCategory.value)
   
   return filtered.slice(0, displayedProjects.value)
 })
 
 const hasMoreProjects = computed(() => {
   const totalFiltered = activeCategory.value === 'All' 
-    ? projects.length 
-    : projects.filter(project => project.category === activeCategory.value).length
+    ? projectList.value.length 
+    : projectList.value.filter(project => project.category === activeCategory.value).length
   
   return displayedProjects.value < totalFiltered
 })
