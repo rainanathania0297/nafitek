@@ -109,7 +109,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 const isScrolled = ref(false)
 const isMenuOpen = ref(false)
@@ -118,7 +118,7 @@ const navigationItems = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Services', href: '/services' },
-  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Portofolio', href: '/portofolio' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' }
 ]
@@ -150,7 +150,8 @@ onUnmounted(() => {
 })
 
 // Close menu on route change
-watch(() => useRoute().path, () => {
+const route = useRoute()
+watch(() => route.path, () => {
   closeMenu()
 })
 </script>

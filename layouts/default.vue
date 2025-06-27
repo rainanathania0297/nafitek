@@ -16,24 +16,11 @@
     
     <!-- Scroll to Top Button -->
     <ScrollToTop />
-    
-    <!-- Loading Overlay -->
-    <LoadingOverlay v-if="isLoading" />
+
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-
-const isLoading = ref(true)
-
-onMounted(() => {
-  // Simulate loading time
-  setTimeout(() => {
-    isLoading.value = false
-  }, 1000)
-})
-
 // SEO and Meta
 useHead({
   htmlAttrs: {

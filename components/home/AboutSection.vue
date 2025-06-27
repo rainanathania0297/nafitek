@@ -9,7 +9,7 @@
         <!-- Section Header -->
         <div class="text-center mb-16">
           <h2 class="text-4xl md:text-5xl font-montserrat font-bold text-white mb-6">
-            About <span class="text-gradient">PT Nafitek Global</span>
+            About <span class="text-gradient">{{ companyStore.companyName }}</span>
           </h2>
           <div class="w-24 h-1 bg-golden mx-auto mb-6"></div>
           <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -87,19 +87,19 @@
               <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="text-center p-4 bg-gray-800/50 rounded-lg">
                   <div class="text-2xl font-bold text-golden mb-1">
-                    <AnimatedCounter :target="500" suffix="+" />
+                    <AnimatedCounter :target="companyStore.companyStats?.project_total" suffix="+" />
                   </div>
                   <p class="text-sm text-gray-300">Projects Completed</p>
                 </div>
                 <div class="text-center p-4 bg-gray-800/50 rounded-lg">
                   <div class="text-2xl font-bold text-golden mb-1">
-                    <AnimatedCounter :target="150" suffix="+" />
+                    <AnimatedCounter :target="companyStore.companyStats?.client_total" suffix="+" />
                   </div>
                   <p class="text-sm text-gray-300">Happy Clients</p>
                 </div>
                 <div class="text-center p-4 bg-gray-800/50 rounded-lg">
                   <div class="text-2xl font-bold text-golden mb-1">
-                    <AnimatedCounter :target="6" suffix="+" />
+                    <AnimatedCounter :target="companyStore.companyStats?.year_experience" suffix="+" />
                   </div>
                   <p class="text-sm text-gray-300">Years Experience</p>
                 </div>
@@ -134,7 +134,7 @@
             <!-- Experience Badge -->
             <div class="absolute bottom-8 left-8 bg-charcoal/90 backdrop-blur-sm rounded-xl p-6 border border-golden/30">
               <div class="text-center">
-                <div class="text-3xl font-bold text-golden mb-1">6+</div>
+                <div class="text-3xl font-bold text-golden mb-1">{{ companyStore.companyStats?.year_experience }}+</div>
                 <p class="text-white text-sm">Years of Excellence</p>
               </div>
             </div>
@@ -151,7 +151,9 @@
 </template>
 
 <script setup>
-// Component logic can be added here if needed
+// stores
+const companyStore = useCompanyStore();
+await callOnce('company-data', () => companyStore.loadData())
 </script>
 
 <style scoped>

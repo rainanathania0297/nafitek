@@ -40,19 +40,19 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 animate-fade-in-up" style="animation-delay: 0.8s">
           <div class="text-center">
             <div class="text-4xl md:text-5xl font-bold text-golden mb-2">
-              <AnimatedCounter :target="500" suffix="+" />
+              <AnimatedCounter :target="companyStore.companyStats?.machine_total" suffix="+" />
             </div>
             <p class="text-gray-300">Machines Serviced</p>
           </div>
           <div class="text-center">
             <div class="text-4xl md:text-5xl font-bold text-golden mb-2">
-              <AnimatedCounter :target="6" suffix="+" />
+              <AnimatedCounter :target="companyStore.companyStats?.year_experience" suffix="+" />
             </div>
             <p class="text-gray-300">Years Experience</p>
           </div>
           <div class="text-center">
             <div class="text-4xl md:text-5xl font-bold text-golden mb-2">
-              <AnimatedCounter :target="100" suffix="%" />
+              <AnimatedCounter :target="companyStore.companyStats?.client_statisfaction" suffix="%" />
             </div>
             <p class="text-gray-300">Client Satisfaction</p>
           </div>
@@ -96,7 +96,9 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+// stores
+const companyStore = useCompanyStore();
+await callOnce('company-data', () => companyStore.loadData())
 
 const scrollToNext = () => {
   const nextSection = document.querySelector('#about-section') || document.querySelector('section:nth-of-type(2)')
@@ -114,9 +116,6 @@ const scrollToNext = () => {
   }
 }
 
-onMounted(() => {
-  // Add any additional animations or interactions here
-})
 </script>
 
 <style scoped>

@@ -45,7 +45,7 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div
               v-for="(testimonial, index) in visibleTestimonials"
-              :key="testimonial.id"
+              :key="index"
               class="group animate-fade-in-up"
               :style="{ animationDelay: `${index * 0.2}s` }"
             >
@@ -57,31 +57,42 @@
 
                 <!-- Testimonial Content -->
                 <blockquote class="text-gray-300 leading-relaxed mb-6 text-lg">
-                  "{{ testimonial.content }}"
+                  "{{ testimonial.message }}"
                 </blockquote>
 
                 <!-- Rating -->
                 <div class="flex items-center mb-4">
                   <div class="flex space-x-1 mr-3">
                     <Icon
-                      v-for="star in 5"
-                      :key="star"
-                      name="mdi:star"
+                      v-for="i in 5"
+                      :key="i"
+                      :name="i <= testimonial.rating ? 'mdi:star' : ((i - testimonial.rating) <= 0.5 ? 'mdi:star-half-full' : 'mdi:star-outline')"
                       class="w-5 h-5 text-golden"
                     />
                   </div>
-                  <span class="text-golden font-semibold">5.0</span>
+                  <span class="text-golden font-semibold">{{ testimonial.rating }}</span>
                 </div>
 
                 <!-- Client Info -->
                 <div class="flex items-center">
-                  <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center mr-4">
-                    <span class="text-charcoal font-bold text-lg">
-                      {{ testimonial.author.charAt(0) }}
+                  <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center mr-4 overflow-hidden">
+                    <NuxtImg 
+                      v-if="testimonial.image" 
+                      preset="thumbnail"
+                      :src="testimonial.image" 
+                      :alt="testimonial.name" 
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <span 
+                      v-else 
+                      class="text-charcoal font-bold text-lg"
+                    >
+                      {{ testimonial.name.charAt(0) }}
                     </span>
                   </div>
                   <div>
-                    <h4 class="text-white font-semibold">{{ testimonial.author }}</h4>
+                    <h4 class="text-white font-semibold">{{ testimonial.name }}</h4>
                     <p class="text-gray-400 text-sm">{{ testimonial.position }}</p>
                     <p class="text-golden text-sm">{{ testimonial.company }}</p>
                   </div>
@@ -91,7 +102,7 @@
                 <div class="mt-4">
                   <span class="inline-flex items-center px-3 py-1 bg-golden/20 text-golden text-xs rounded-full border border-golden/30">
                     <Icon name="mdi:briefcase" class="w-3 h-3 mr-1" />
-                    {{ testimonial.projectType }}
+                    {{ testimonial.project }}
                   </span>
                 </div>
 
@@ -106,14 +117,12 @@
             <button
               @click="previousTestimonials"
               class="w-12 h-12 bg-gray-700 hover:bg-golden rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-              :disabled="currentTestimonialIndex === 0"
             >
               <Icon name="mdi:chevron-left" class="w-6 h-6 text-white" />
             </button>
             <button
               @click="nextTestimonials"
               class="w-12 h-12 bg-gray-700 hover:bg-golden rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-              :disabled="currentTestimonialIndex >= testimonials.length - 2"
             >
               <Icon name="mdi:chevron-right" class="w-6 h-6 text-white" />
             </button>
@@ -159,91 +168,47 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
+
+const companyStore = useCompanyStore();
+const testimonialStore = useTestimonialStore();
+await callOnce('company-data', () => companyStore.loadData())
+await callOnce('testimonial-data', () => testimonialStore.loadData())
 
 const currentTestimonialIndex = ref(0)
 
 const metrics = [
   {
     icon: 'mdi:cog',
-    value: 500,
+    value: companyStore.companyStats?.machine_total,
     suffix: '+',
     label: 'Machines Serviced',
     description: 'Successfully maintained and repaired'
   },
   {
     icon: 'mdi:account-group',
-    value: 150,
+    value: companyStore.companyStats?.client_total,
     suffix: '+',
     label: 'Happy Clients',
     description: 'Satisfied customers nationwide'
   },
   {
     icon: 'mdi:clock-check',
-    value: 99,
+    value: companyStore.companyStats?.project_ontime_percentage,
     suffix: '%',
     label: 'On-Time Delivery',
     description: 'Projects completed on schedule'
   },
   {
     icon: 'mdi:shield-check',
-    value: 6,
+    value: companyStore.companyStats?.year_experience,
     suffix: '+',
     label: 'Years Experience',
     description: 'Proven track record since 2018'
   }
 ]
 
-const testimonials = [
-  {
-    id: 1,
-    content: "PT Nafitek Global Indonesia has been instrumental in maintaining our production line efficiency. Their expertise in vacuum pump maintenance and quick response time has saved us significant downtime costs.",
-    author: "Ahmad Wijaya",
-    position: "Production Manager",
-    company: "PT Elektronik Nusantara",
-    projectType: "Vacuum Pump Maintenance"
-  },
-  {
-    id: 2,
-    content: "The automation solutions provided by Nafitek have revolutionized our manufacturing process. The PLC programming and control panel installation were executed flawlessly with excellent documentation.",
-    author: "Sari Indrawati",
-    position: "Engineering Director",
-    company: "PT Industri Maju",
-    projectType: "Automation Services"
-  },
-  {
-    id: 3,
-    content: "Outstanding service quality and competitive pricing. Their team's technical expertise in special purpose machines helped us achieve our production targets ahead of schedule.",
-    author: "Robert Chen",
-    position: "Operations Manager",
-    company: "PT Precision Manufacturing",
-    projectType: "Special Purpose Machine"
-  },
-  {
-    id: 4,
-    content: "Reliable partner for all our industrial component needs. The quality of spare parts and after-sales support from Nafitek has been consistently excellent over the years.",
-    author: "Diana Kusuma",
-    position: "Procurement Head",
-    company: "PT Teknologi Industri",
-    projectType: "Component Supply"
-  },
-  {
-    id: 5,
-    content: "Professional team with deep understanding of industrial automation. Their Andon system implementation has significantly improved our production monitoring and quality control.",
-    author: "Michael Tan",
-    position: "Plant Manager",
-    company: "PT Otomotif Prima",
-    projectType: "Andon System"
-  },
-  {
-    id: 6,
-    content: "Exceptional technical support and training provided by Nafitek team. Their expertise in Atlas Copco and Ulvac products has been invaluable for our semiconductor operations.",
-    author: "Lisa Hartono",
-    position: "Technical Manager",
-    company: "PT Semikonduktor Indonesia",
-    projectType: "Brand Distribution"
-  }
-]
+const testimonials = computed(() => testimonialStore.testimonialList || [])
 
 const industries = [
   'Automotive',
@@ -255,18 +220,22 @@ const industries = [
 ]
 
 const visibleTestimonials = computed(() => {
-  return testimonials.slice(currentTestimonialIndex.value, currentTestimonialIndex.value + 2)
+  return testimonials.value.slice(currentTestimonialIndex.value, currentTestimonialIndex.value + 2)
 })
 
 const nextTestimonials = () => {
-  if (currentTestimonialIndex.value < testimonials.length - 2) {
+  if (currentTestimonialIndex.value < testimonials.value.length - 2) {
     currentTestimonialIndex.value += 2
+  } else if (currentTestimonialIndex.value >= testimonials.value.length - 2) {
+    currentTestimonialIndex.value = 0
   }
 }
 
 const previousTestimonials = () => {
   if (currentTestimonialIndex.value > 0) {
     currentTestimonialIndex.value -= 2
+  } else if (currentTestimonialIndex.value <= 0) {
+    currentTestimonialIndex.value = testimonials.value.length - 2
   }
 }
 
@@ -277,11 +246,9 @@ const goToTestimonial = (index) => {
 // Auto-rotate testimonials
 onMounted(() => {
   setInterval(() => {
-    if (currentTestimonialIndex.value >= testimonials.length - 2) {
-      currentTestimonialIndex.value = 0
-    } else {
+    nextTick(() => {
       nextTestimonials()
-    }
+    })
   }, 8000)
 })
 </script>

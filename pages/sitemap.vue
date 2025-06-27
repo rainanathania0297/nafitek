@@ -51,11 +51,11 @@
               </li>
               <li>
                 <NuxtLink 
-                  to="/portfolio" 
+                  to="/portofolio" 
                   class="flex items-center text-gray-300 hover:text-golden transition-colors duration-300"
                 >
                   <Icon name="heroicons:chevron-right" class="w-4 h-4 mr-2" />
-                  Portfolio
+                  Portofolio
                 </NuxtLink>
               </li>
               <li>
@@ -170,7 +170,7 @@
               </li>
               <li>
                 <NuxtLink 
-                  to="/portfolio#industries" 
+                  to="/portofolio#industries" 
                   class="flex items-center text-gray-300 hover:text-golden transition-colors duration-300"
                 >
                   <Icon name="heroicons:chevron-right" class="w-4 h-4 mr-2" />
@@ -257,7 +257,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Complete sitemap of PT Nafitek Global Indonesia website. Navigate through all pages including services, portfolio, blog, and company information.'
+      content: 'Complete sitemap of PT Nafitek Global Indonesia website. Navigate through all pages including services, portofolio, blog, and company information.'
     },
     {
       name: 'keywords',

@@ -1,0 +1,64 @@
+name: "PT Nafitek Global Indonesia"
+year_experience: 6
+client_total: 100
+client_statisfaction: 90
+project_total: 150
+project_success_percentage: 98
+project_ontime_percentage: 99
+machine_total: 500
+industry_served: 50
+strengths:
+  - number: 1
+    icon: "mdi:cog-box"
+    name: High-Quality Spare Parts
+    description: "We provide a wide range of genuine, high-quality spare parts for your machinery's needs. Our products are designed to ensure optimal performance and minimize the risk of damage."
+    features:
+      - "Genuine OEM parts"
+      - "Quality assurance testing"
+      - "Wide inventory range"
+      - "Fast delivery service"
+  - number: 2
+    icon: "mdi:medal"
+    name: Extensive Experience
+    description: "As a reputable provider of machinery services, we have a strong reputation and gained extensive experience. We commit to deliver effective solutions and satisfactory outcomes."
+    features:
+      - "6+ years in industry"
+      - "500+ projects completed"
+      - "Proven track record"
+      - "Industry expertise"
+  - number: 3
+    icon: "mdi:account-group"
+    name: Experienced Professionals
+    description: "Our team comprises experienced professionals who offer innovative and efficient solutions. We guarantee that all services provided adhere to the highest industry standards."
+    features:
+      - "Certified technicians"
+      - "Continuous training"
+      - "Technical expertise"
+      - "Professional standards"
+  - number: 4
+    icon: "mdi:currency-usd"
+    name: Competitive Pricing
+    description: "We offer competitive pricing and ensure transparency in every project. Our prices truly reflect the quality of service we provide."
+    features:
+      - "Transparent pricing"
+      - "No hidden costs"
+      - "Value for money"
+      - "Flexible payment terms"
+  - number: 5
+    icon: "mdi:face-agent"
+    name: Exceptional Customer Service
+    description: "We are dedicated to providing outstanding customer service to ensure customer satisfaction. We aim to create a safe and comfortable experience while you use our services and products."
+    features:
+      - "24/7 support available"
+      - "Quick response time"
+      - "Customer-focused approach"
+      - "After-sales support"
+  - number: 6
+    icon: "mdi:lightbulb-on"
+    name: Innovation & Technology
+    description: "We leverage cutting-edge technology and innovative approaches to deliver superior solutions that meet the evolving needs of modern industry."
+    features:
+      - "Latest technology"
+      - "Innovative solutions"
+      - "Continuous improvement"
+      - "Future-ready approach"

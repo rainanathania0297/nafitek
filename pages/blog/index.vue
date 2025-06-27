@@ -69,7 +69,7 @@
               </h3>
               
               <p class="text-lg text-gray-300 mb-6 leading-relaxed">
-                {{ featuredArticle.excerpt }}
+                {{ featuredArticle.overview }}
               </p>
               
               <div class="flex items-center space-x-4 mb-6">
@@ -82,10 +82,13 @@
                 </div>
               </div>
 
-              <div class="inline-flex items-center px-8 py-4 bg-golden text-charcoal font-bold rounded-lg hover:bg-golden-light transition-all duration-300 hover:scale-105">
+              <NuxtLink 
+                :to="featuredArticle.path?.replace('/article/', '/blog/')"
+                class="inline-flex items-center px-8 py-4 bg-golden text-charcoal font-bold rounded-lg hover:bg-golden-light transition-all duration-300 hover:scale-105"
+              >
                 Read Full Article
                 <Icon name="heroicons:arrow-right" class="w-5 h-5 ml-2" />
-              </div>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -155,7 +158,7 @@
               </h3>
               
               <p class="text-gray-300 mb-4 line-clamp-3">
-                {{ article.excerpt }}
+                {{ article.overview }}
               </p>
               
               <!-- Author -->
@@ -169,10 +172,13 @@
               </div>
 
               <!-- Read More -->
-              <div class="inline-flex items-center text-golden hover:text-golden-light transition-colors duration-300 font-medium">
+              <NuxtLink 
+                :to="article.path?.replace('/article/', '/blog/')"
+                class="inline-flex items-center text-golden hover:text-golden-light transition-colors duration-300 font-medium"
+              >
                 Read More
                 <Icon name="heroicons:arrow-right" class="w-4 h-4 ml-1" />
-              </div>
+              </NuxtLink>
             </div>
           </article>
         </div>
@@ -231,116 +237,43 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+// stores
+const articleStore = useArticleStore();
+await callOnce('article-data', () => articleStore.loadData())
+
 // Reactive data
 const activeCategory = ref('All')
 const displayedArticles = ref(9)
 const newsletterEmail = ref('')
 const isSubscribing = ref(false)
 
-// Categories
-const categories = [
-  'All',
-  'Maintenance',
-  'Automation',
-  'Industry Trends',
-  'Technical Guides',
-  'Case Studies'
-]
+// Transform content data to match expected format
+const allArticles = computed(() => {
+  return articleStore.articleList
+})
 
-// Sample blog articles data
-const allArticles = [
-  {
-    id: 1,
-    title: 'The Future of Industrial Automation: Trends to Watch in 2024',
-    excerpt: 'Explore the latest trends in industrial automation, from AI-powered systems to IoT integration, and how they\'re transforming manufacturing processes.',
-    category: 'Industry Trends',
-    author: 'Technical Team',
-    authorRole: 'Automation Specialists',
-    date: '2024-01-15',
-    readTime: 8,
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    slug: 'future-industrial-automation-trends-2024',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'Vacuum Pump Maintenance: Best Practices for Optimal Performance',
-    excerpt: 'Learn essential maintenance techniques to extend the life of your vacuum pumps and ensure consistent performance in industrial applications.',
-    category: 'Maintenance',
-    author: 'Maintenance Team',
-    authorRole: 'Service Engineers',
-    date: '2024-01-10',
-    readTime: 6,
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    slug: 'vacuum-pump-maintenance-best-practices'
-  },
-  {
-    id: 3,
-    title: 'PLC Programming: Essential Tips for Industrial Control Systems',
-    excerpt: 'Master the fundamentals of PLC programming with practical tips and best practices for designing efficient industrial control systems.',
-    category: 'Technical Guides',
-    author: 'Automation Team',
-    authorRole: 'PLC Specialists',
-    date: '2024-01-05',
-    readTime: 10,
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    slug: 'plc-programming-essential-tips'
-  },
-  {
-    id: 4,
-    title: 'Case Study: Successful Automation Implementation at PT Elektronik',
-    excerpt: 'Discover how we transformed a manual production line into a fully automated system, resulting in 40% efficiency improvement.',
-    category: 'Case Studies',
-    author: 'Project Team',
-    authorRole: 'Project Managers',
-    date: '2023-12-28',
-    readTime: 7,
-    image: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    slug: 'case-study-automation-pt-elektronik'
-  },
-  {
-    id: 5,
-    title: 'Understanding Industrial Component Quality Standards',
-    excerpt: 'A comprehensive guide to quality standards for industrial components and how to ensure compliance in your operations.',
-    category: 'Technical Guides',
-    author: 'Quality Team',
-    authorRole: 'Quality Engineers',
-    date: '2023-12-20',
-    readTime: 9,
-    image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    slug: 'industrial-component-quality-standards'
-  },
-  {
-    id: 6,
-    title: 'Preventive Maintenance Strategies for Manufacturing Equipment',
-    excerpt: 'Implement effective preventive maintenance strategies to reduce downtime and extend equipment lifespan in your facility.',
-    category: 'Maintenance',
-    author: 'Maintenance Team',
-    authorRole: 'Service Engineers',
-    date: '2023-12-15',
-    readTime: 8,
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    slug: 'preventive-maintenance-strategies'
-  }
-]
+// Get unique categories from articles
+const categories = computed(() => {
+  return ['All', ...articleStore.categoryList]
+})
 
 // Computed properties
 const featuredArticle = computed(() => {
-  return allArticles.find(article => article.featured)
+  return allArticles.value.find(article => article.featured)
 })
 
 const filteredArticles = computed(() => {
   const filtered = activeCategory.value === 'All' 
-    ? allArticles.filter(article => !article.featured)
-    : allArticles.filter(article => article.category === activeCategory.value && !article.featured)
+    ? allArticles.value.filter(article => !article.featured)
+    : allArticles.value.filter(article => article.category === activeCategory.value && !article.featured)
   
   return filtered.slice(0, displayedArticles.value)
 })
 
 const hasMoreArticles = computed(() => {
   const totalFiltered = activeCategory.value === 'All' 
-    ? allArticles.filter(article => !article.featured).length
-    : allArticles.filter(article => article.category === activeCategory.value && !article.featured).length
+    ? allArticles.value.filter(article => !article.featured).length
+    : allArticles.value.filter(article => article.category === activeCategory.value && !article.featured).length
   
   return displayedArticles.value < totalFiltered
 })

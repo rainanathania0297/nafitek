@@ -13,6 +13,6 @@ Disallow: /node_modules/
 Allow: /
 Allow: /about
 Allow: /services
-Allow: /portfolio
+Allow: /portofolio
 Allow: /blog
 Allow: /contact

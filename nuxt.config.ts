@@ -11,8 +11,23 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    '@pinia/nuxt'
   ],
+  
+  content: {
+    documentDriven: false,
+    markdown: {
+      toc: {
+        depth: 3,
+        searchDepth: 3
+      },
+      anchorLinks: true
+    },
+    highlight: {
+      theme: 'github-dark'
+    }
+  },
 
   css: ['~/assets/css/main.css'],
 
@@ -50,6 +65,7 @@ export default defineNuxtConfig({
   image: {
     quality: 80,
     format: ['webp', 'jpg'],
+    dir: 'assets/images',
     screens: {
       xs: 320,
       sm: 640,
@@ -71,8 +87,15 @@ export default defineNuxtConfig({
         modifiers: {
           format: 'webp',
           quality: 75,
+          width: 50,
+          height: 50
+        }
+      },
+      brand: {
+        modifiers: {
+          format: 'webp',
+          quality: 85,
           width: 400,
-          height: 300
         }
       }
     }
@@ -85,7 +108,7 @@ export default defineNuxtConfig({
         '/',
         '/about',
         '/services',
-        '/portfolio',
+        '/portofolio',
         '/blog',
         '/contact',
         '/sitemap',

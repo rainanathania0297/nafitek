@@ -22,8 +22,8 @@
         <!-- Featured Partners -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div
-            v-for="(partner, index) in featuredPartners"
-            :key="partner.name"
+            v-for="(partner, index) in partnerStore.pinnedPartnerList"
+            :key="partner.id"
             class="group"
           >
             <div 
@@ -33,7 +33,21 @@
               <!-- Partner Logo -->
               <div class="flex items-center justify-center h-24 mb-6">
                 <div class="text-4xl font-bold text-white group-hover:text-golden transition-colors duration-300">
-                  {{ partner.name }}
+                  <template v-if="partner.logo">
+                    <NuxtImg
+                      preset="brand"
+                      fit="contain"
+                      :src="partner.logo"
+                      :alt="partner.name"
+                      class="w-auto filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                      loading="lazy"
+                    />
+                  </template>
+                  <template v-else>
+                    <div class="text-lg font-semibold text-gray-400 group-hover:text-golden transition-colors duration-300 uppercase tracking-wide">
+                      {{ partner.name }}
+                    </div>
+                  </template>
                 </div>
               </div>
 
@@ -46,14 +60,14 @@
                   {{ partner.description }}
                 </p>
                 
-                <!-- Specialties -->
+                <!-- Products -->
                 <div class="flex flex-wrap gap-2 justify-center">
                   <span
-                    v-for="specialty in partner.specialties"
-                    :key="specialty"
+                    v-for="product in partner.products"
+                    :key="product"
                     class="px-3 py-1 bg-golden/20 text-golden text-xs rounded-full border border-golden/30"
                   >
-                    {{ specialty }}
+                    {{ product }}
                   </span>
                 </div>
               </div>
@@ -72,15 +86,27 @@
           
           <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
             <div
-              v-for="(brand, index) in allPartners"
-              :key="brand"
+              v-for="(partner, index) in partnerStore.partnerList"
+              :key="partner.id"
               class="group flex items-center justify-center h-20 animate-fade-in-up"
               :style="{ animationDelay: `${index * 0.05}s` }"
             >
               <div class="text-center">
-                <div class="text-lg font-semibold text-gray-400 group-hover:text-golden transition-colors duration-300 uppercase tracking-wide">
-                  {{ brand }}
-                </div>
+                <template v-if="partner.logo">
+                  <NuxtImg
+                    preset="brand"
+                    fit="contain"
+                    :src="partner.logo"
+                    :alt="partner.name"
+                    class="w-auto filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    loading="lazy"
+                  />
+                </template>
+                <template v-else>
+                  <div class="text-lg font-semibold text-gray-400 group-hover:text-golden transition-colors duration-300 uppercase tracking-wide">
+                    {{ partner.name }}
+                  </div>
+                </template>
               </div>
             </div>
           </div>
@@ -127,38 +153,8 @@
 </template>
 
 <script setup>
-const featuredPartners = [
-  {
-    name: 'Atlas Copco',
-    description: 'Leading provider of sustainable productivity solutions including vacuum pumps and industrial equipment.',
-    specialties: ['Vacuum Pumps', 'Compressors', 'Industrial Tools']
-  },
-  {
-    name: 'Trusco',
-    description: 'Comprehensive range of industrial supplies, tools, and safety equipment for manufacturing industries.',
-    specialties: ['Industrial Supplies', 'Safety Equipment', 'Tools']
-  },
-  {
-    name: 'Ulvac',
-    description: 'Advanced vacuum technology solutions for semiconductor, electronics, and industrial applications.',
-    specialties: ['Vacuum Technology', 'Semiconductor', 'Electronics']
-  }
-]
-
-const allPartners = [
-  'Atlas Copco',
-  'Trusco',
-  'Ulvac',
-  'Pfeiffer',
-  'Leybold',
-  'Inficon',
-  'Shinko Seiki',
-  'Edwards',
-  'Busch',
-  'Oerlikon',
-  'Agilent',
-  'Ebara'
-]
+const partnerStore = usePartnerStore();
+await callOnce('partner-data', () => partnerStore.loadData());
 
 const partnershipBenefits = [
   {

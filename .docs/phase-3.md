@@ -81,7 +81,7 @@ Phase 3 introduces advanced features, content management capabilities, and multi
   - Before/after comparisons
   - Technical specifications
   - Results and outcomes
-- [ ] **Project Portfolio**
+- [ ] **Project Portofolio**
   - Project gallery with filtering
   - Industry-specific case studies
   - Service-specific showcases

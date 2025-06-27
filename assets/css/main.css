@@ -196,6 +196,10 @@ h1, h2, h3, h4, h5, h6 {
   @apply border-2 border-white text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-white hover:text-gray-900;
 }
 
+.btn-default {
+  @apply bg-gray-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-600 hover:transform hover:scale-105 hover:shadow-lg;
+}
+
 /* Card styles */
 .card-industrial {
   @apply bg-gray-800 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transition-all duration-300 hover:bg-opacity-70 hover:border-yellow-400 hover:transform hover:scale-105;

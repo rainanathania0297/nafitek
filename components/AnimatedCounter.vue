@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 const props = defineProps({
@@ -44,7 +44,9 @@ const animateCounter = () => {
     displayValue.value = Math.floor(startValue + (endValue - startValue) * easeOutQuart)
     
     if (progress < 1) {
-      requestAnimationFrame(animate)
+      nextTick(() => {
+        requestAnimationFrame(animate)
+      })
     } else {
       displayValue.value = endValue
     }

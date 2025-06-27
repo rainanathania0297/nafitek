@@ -20,7 +20,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
         <div
           v-for="(service, index) in services"
-          :key="service.title"
+          :key="service.id"
           class="group relative"
         >
           <!-- Service Card -->
@@ -32,7 +32,7 @@
             <div class="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
               <NuxtImg
                 :src="service.image"
-                :alt="service.title"
+                :alt="service.name"
                 class="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -50,12 +50,12 @@
 
               <!-- Title -->
               <h3 class="text-2xl font-montserrat font-bold text-white mb-4 group-hover:text-golden transition-colors duration-300">
-                {{ service.title }}
+                {{ service.name }}
               </h3>
 
               <!-- Description -->
-              <p class="text-gray-300 leading-relaxed mb-6 flex-grow">
-                {{ service.description }}
+              <p class="text-gray-300 leading-relaxed mb-6 line-clamp-4">
+                {{ service.overview }}
               </p>
 
               <!-- Key Features -->
@@ -63,9 +63,9 @@
                 <h4 class="text-sm font-semibold text-golden mb-3 uppercase tracking-wide">
                   Key Features
                 </h4>
-                <ul class="space-y-2">
+                <ul :class="service.slug === 'vacuum-pump-specialists' ? 'grid grid-cols-2 gap-2' : 'space-y-2'">
                   <li 
-                    v-for="feature in service.features"
+                    v-for="feature in service.feature_list"
                     :key="feature"
                     class="flex items-start text-sm text-gray-400"
                   >
@@ -123,73 +123,9 @@
 </template>
 
 <script setup>
-const services = [
-  {
-    title: 'Component Supply',
-    slug: 'component-supply',
-    icon: 'mdi:package-variant',
-    description: 'We offer a diverse range of high-quality components to meet the operational needs of our customers\' machinery. We ensure that spare parts are readily available and comply with industry standards.',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    features: [
-      'Mechanical and electrical spare parts',
-      'Vacuum accessory components',
-      'Quality assurance testing',
-      'Fast delivery service'
-    ]
-  },
-  {
-    title: 'Special Purpose Machines',
-    slug: 'special-purpose-machines',
-    icon: 'mdi:robot-industrial',
-    description: 'We provide specialized machines to enhance efficiency and precision in various manufacturing applications. Our team customizes each machine to meet our clients\' specific requirements.',
-    image: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    features: [
-      'Custom machine design',
-      'Precision manufacturing',
-      'Performance optimization',
-      'Technical documentation'
-    ]
-  },
-  {
-    title: 'Maintenance & Repair',
-    slug: 'maintenance-repair',
-    icon: 'mdi:wrench',
-    description: 'We offer comprehensive maintenance and repair services for machines to keep your equipment operating at peak performance. Our skilled team is prepared to address a diverse range of issues.',
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    features: [
-      'Vacuum pump specialization',
-      'Helium leak testing',
-      'Electric motor rewinding',
-      'Electronic component repair'
-    ]
-  },
-  {
-    title: 'Automation Services',
-    slug: 'automation',
-    icon: 'mdi:robot',
-    description: 'We provide automation services aimed at improving the efficiency of industrial machinery. Our objective is to optimize machine performance through advanced technology.',
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    features: [
-      'PLC program installation',
-      'Control panel wiring',
-      'Andon systems',
-      'Process optimization'
-    ]
-  },
-  {
-    title: 'Brand Distribution',
-    slug: 'brand-distribution',
-    icon: 'mdi:store',
-    description: 'We offer a diverse range of products to meet the machinery needs of various industrial sectors. Our selection includes trusted brands known for their reliability.',
-    image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    features: [
-      'Atlas Copco vacuum pumps',
-      'Trusco products & chemicals',
-      'Ulvac solutions',
-      'Authorized distributor'
-    ]
-  }
-]
+const serviceStore = useServiceStore();
+await callOnce('service-data', () => serviceStore.loadData())
+const services = computed(() => serviceStore.serviceList);
 </script>
 
 <style scoped>

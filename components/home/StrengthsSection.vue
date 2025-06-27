@@ -20,8 +20,8 @@
       <!-- Strengths Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         <div
-          v-for="(strength, index) in strengths"
-          :key="strength.title"
+          v-for="(strength, index) in companyStore.companyStrengths"
+          :key="strength.name"
           class="group relative"
         >
           <!-- Card -->
@@ -40,7 +40,7 @@
 
             <!-- Content -->
             <h3 class="text-xl font-montserrat font-semibold text-white mb-4 group-hover:text-golden transition-colors duration-300">
-              {{ strength.title }}
+              {{ strength.name }}
             </h3>
             
             <p class="text-gray-300 leading-relaxed mb-6">
@@ -83,74 +83,10 @@
 </template>
 
 <script setup>
-const strengths = [
-  {
-    title: 'High-Quality Spare Parts',
-    icon: 'mdi:cog-box',
-    description: 'We provide a wide range of genuine, high-quality spare parts for your machinery\'s needs. Our products are designed to ensure optimal performance and minimize the risk of damage.',
-    features: [
-      'Genuine OEM parts',
-      'Quality assurance testing',
-      'Wide inventory range',
-      'Fast delivery service'
-    ]
-  },
-  {
-    title: 'Extensive Experience',
-    icon: 'mdi:medal',
-    description: 'As a reputable provider of machinery services, we have a strong reputation and gained extensive experience. We commit to deliver effective solutions and satisfactory outcomes.',
-    features: [
-      '6+ years in industry',
-      '500+ projects completed',
-      'Proven track record',
-      'Industry expertise'
-    ]
-  },
-  {
-    title: 'Experienced Professionals',
-    icon: 'mdi:account-group',
-    description: 'Our team comprises experienced professionals who offer innovative and efficient solutions. We guarantee that all services provided adhere to the highest industry standards.',
-    features: [
-      'Certified technicians',
-      'Continuous training',
-      'Technical expertise',
-      'Professional standards'
-    ]
-  },
-  {
-    title: 'Competitive Pricing',
-    icon: 'mdi:currency-usd',
-    description: 'We offer competitive pricing and ensure transparency in every project. Our prices truly reflect the quality of service we provide.',
-    features: [
-      'Transparent pricing',
-      'No hidden costs',
-      'Value for money',
-      'Flexible payment terms'
-    ]
-  },
-  {
-    title: 'Exceptional Customer Service',
-    icon: 'mdi:face-agent',
-    description: 'We are dedicated to providing outstanding customer service to ensure customer satisfaction. We aim to create a safe and comfortable experience while you use our services and products.',
-    features: [
-      '24/7 support available',
-      'Quick response time',
-      'Customer-focused approach',
-      'After-sales support'
-    ]
-  },
-  {
-    title: 'Innovation & Technology',
-    icon: 'mdi:lightbulb-on',
-    description: 'We leverage cutting-edge technology and innovative approaches to deliver superior solutions that meet the evolving needs of modern industry.',
-    features: [
-      'Latest technology',
-      'Innovative solutions',
-      'Continuous improvement',
-      'Future-ready approach'
-    ]
-  }
-]
+// stores
+const companyStore = useCompanyStore();
+await callOnce('company-data', () => companyStore.loadData())
+
 </script>
 
 <style scoped>
