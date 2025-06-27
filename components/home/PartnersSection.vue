@@ -39,6 +39,7 @@
                       :src="partner.logo"
                       :alt="partner.name"
                       class="w-auto filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                      :class="partner.logo.includes('.svg') ? 'h-20' : 'h-auto'"
                       loading="lazy"
                     />
                   </template>
@@ -97,6 +98,7 @@
                     :src="partner.logo"
                     :alt="partner.name"
                     class="w-auto filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    :class="partner.logo.includes('.svg') ? 'h-16' : 'h-auto'"
                     loading="lazy"
                   />
                 </template>
