@@ -29,7 +29,7 @@ useHead({
   meta: [
     { name: 'theme-color', content: '#3F4240' },
     { name: 'msapplication-TileColor', content: '#3F4240' },
-    { name: 'apple-mobile-web-app-capable', content: 'yes' },
+    { name: 'mobile-web-app-capable', content: 'yes' },
     { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' }
   ]
 })
