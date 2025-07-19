@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 lg:py-32 bg-gradient-industrial relative overflow-hidden">
+  <section class="py-20 lg:py-32 bg-charcoal relative overflow-hidden">
     <!-- Background Elements -->
     <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-10"></div>
     <div class="absolute top-10 left-10 w-32 h-32 border border-golden/20 rotate-45 animate-pulse-slow"></div>
@@ -184,12 +184,12 @@
 
         <!-- Social Proof -->
         <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s">
-          <p class="text-gray-400 mb-6">Trusted by leading companies across Indonesia</p>
+          <p class="text-gray-300 mb-6">Trusted by leading companies across Indonesia</p>
           <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            <div class="text-gray-500 font-semibold">PT Elektronik Nusantara</div>
-            <div class="text-gray-500 font-semibold">PT Industri Maju</div>
-            <div class="text-gray-500 font-semibold">PT Precision Manufacturing</div>
-            <div class="text-gray-500 font-semibold">PT Teknologi Industri</div>
+            <div class="text-gray-400 font-semibold">PT Elektronik Nusantara</div>
+            <div class="text-gray-400 font-semibold">PT Industri Maju</div>
+            <div class="text-gray-400 font-semibold">PT Precision Manufacturing</div>
+            <div class="text-gray-400 font-semibold">PT Teknologi Industri</div>
           </div>
         </div>
       </div>

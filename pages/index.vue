@@ -12,6 +12,9 @@
     <!-- Services Section -->
     <HomeServicesSection />
     
+    <!-- Our Clients Section -->
+    <HomeClientsSection />
+    
     <!-- Partner Brands Section -->
     <HomePartnersSection />
     
@@ -32,7 +35,9 @@
 <script setup>
 // stores
 const companyStore = useCompanyStore();
+const clientStore = useClientStore();
 await callOnce('company-data', () => companyStore.loadData())
+await callOnce('client-data', () => clientStore.loadData())
 
 // SEO Meta
 useHead({
