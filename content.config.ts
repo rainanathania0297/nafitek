@@ -97,5 +97,16 @@ export default defineContentConfig({
         featured: z.boolean(),
       })
     }),
+    clients: defineCollection({
+      source: 'clients/**/*.{md,yaml,yml}',
+      type: 'data',
+      schema: z.object({
+        name: z.string(),
+        logo: z.string(),
+        industry: z.string(),
+        description: z.string(),
+        featured: z.boolean(),
+      })
+    }),
   }
 })

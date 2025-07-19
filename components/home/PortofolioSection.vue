@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 lg:py-32 bg-charcoal relative overflow-hidden">
+  <section class="py-20 lg:py-32 bg-gradient-industrial relative overflow-hidden">
     <!-- Background Elements -->
     <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
     <div class="absolute top-20 right-20 w-24 h-24 border border-golden/20 rotate-45 animate-pulse-slow"></div>
