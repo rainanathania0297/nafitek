@@ -15,13 +15,13 @@
               <h3 class="text-xl font-montserrat font-bold text-white">
                 PT Nafitek Global Indonesia
               </h3>
-              <p class="text-golden">Industrial Services Excellence</p>
+              <p class="text-golden">Customer Focused, Commited to Excellent</p>
             </div>
           </div>
           
           <p class="text-gray-300 mb-6 max-w-md leading-relaxed">
             Your trusted partner for high-quality machinery procurement, maintenance, 
-            and repair services since 2018. We deliver exceptional value through 
+            and repair services since {{ companyStore.companyStats.year_established }}. We deliver exceptional value through 
             innovative solutions and professional expertise.
           </p>
           
@@ -30,19 +30,19 @@
             <div class="flex items-center space-x-3">
               <Icon name="mdi:map-marker" class="text-golden w-5 h-5" />
               <span class="text-gray-300 text-sm">
-                Kp. Rawa Bebek RT 03/RW 10, Kel. Kota Baru, Kec. Bekasi Barat, Bekasi, Jawa Barat 17133
+                {{ companyStore.companyData.address.street }}, {{ companyStore.companyData.address.village }}, {{ companyStore.companyData.address.district }}, {{ companyStore.companyData.address.city }}, {{ companyStore.companyData.address.province }}, {{ companyStore.companyData.address.country }} {{ companyStore.companyData.address.postal_code }}
               </span>
             </div>
             <div class="flex items-center space-x-3">
               <Icon name="mdi:phone" class="text-golden w-5 h-5" />
-              <a href="tel:+622122157327" class="text-gray-300 hover:text-golden transition-colors">
-                +62 21 2215 7327
+              <a :href="`tel:${companyStore.companyData.phone}`" class="text-gray-300 hover:text-golden transition-colors">
+                {{ companyStore.companyData.phone }}
               </a>
             </div>
             <div class="flex items-center space-x-3">
               <Icon name="mdi:email" class="text-golden w-5 h-5" />
-              <a href="mailto:sales@nafitekglobal-ind.com" class="text-gray-300 hover:text-golden transition-colors">
-                sales@nafitekglobal-ind.com
+              <a :href="`mailto:${companyStore.companyData.email}`" class="text-gray-300 hover:text-golden transition-colors">
+                {{ companyStore.companyData.email }}
               </a>
             </div>
           </div>
@@ -72,10 +72,10 @@
             Our Services
           </h4>
           <ul class="space-y-3">
-            <li v-for="service in services" :key="service">
+            <li v-for="service in serviceStore.serviceList" :key="service.id">
               <div class="text-gray-300 flex items-center space-x-2">
                 <Icon name="mdi:gear" class="w-4 h-4 text-golden" />
-                <span class="text-sm">{{ service }}</span>
+                <span class="text-sm">{{ service.name }}</span>
               </div>
             </li>
           </ul>
@@ -128,30 +128,27 @@
 <script setup>
 import { computed } from 'vue'
 
+const companyStore = useCompanyStore();
+const serviceStore = useServiceStore();
+await callOnce('company-data', () => companyStore.loadData())
+await callOnce('service-data', () => serviceStore.loadData())
+
 const currentYear = computed(() => new Date().getFullYear())
 
 const quickLinks = [
   { name: 'About Us', href: '/about' },
   { name: 'Our Services', href: '/services' },
-  { name: 'Portofolio', href: '/portofolio' },
-  { name: 'Blog', href: '/blog' },
+  // { name: 'Portofolio', href: '/portofolio' },
+  // { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
   { name: 'Get Quote', href: '/contact' }
 ]
 
-const services = [
-  'Component Supply',
-  'Special Purpose Machines',
-  'Maintenance & Repair',
-  'Automation Services',
-  'Brand Distribution'
-]
-
 const socialLinks = [
-  { name: 'LinkedIn', href: '#', icon: 'mdi:linkedin' },
-  { name: 'Facebook', href: '#', icon: 'mdi:facebook' },
-  { name: 'Instagram', href: '#', icon: 'mdi:instagram' },
-  { name: 'YouTube', href: '#', icon: 'mdi:youtube' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/nafitek-global-indonesia', icon: 'mdi:linkedin' },
+  // { name: 'Facebook', href: '#', icon: 'mdi:facebook' },
+  // { name: 'Instagram', href: '#', icon: 'mdi:instagram' },
+  // { name: 'YouTube', href: '#', icon: 'mdi:youtube' },
   { name: 'WhatsApp', href: 'https://wa.me/622122157327', icon: 'mdi:whatsapp' }
 ]
 </script>

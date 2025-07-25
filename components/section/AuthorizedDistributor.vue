@@ -1,26 +1,21 @@
 <template>
-  <section class="py-20 lg:py-32 bg-charcoal relative overflow-hidden">
-    <!-- Background Elements -->
-    <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-10"></div>
-    <div
-      class="absolute top-10 left-10 w-16 h-16 border border-golden/20 rotate-45 animate-pulse-slow"
-    ></div>
-    <div
-      class="absolute bottom-10 right-10 w-20 h-20 bg-golden/10 rotate-12 animate-float"
-    ></div>
-
+  <section 
+    :id="props.id"
+    :class="props.class"
+    class="py-20 lg:py-32 relative overflow-hidden"
+  >
+    <slot name="prefix"></slot>
     <div class="container mx-auto px-4 lg:px-8">
       <!-- Section Header -->
       <div class="text-center mb-16">
         <h2
           class="text-4xl md:text-5xl font-montserrat font-bold text-white mb-6"
         >
-          Our <span class="text-gradient">Partners</span>
+          Authorized <span class="text-gradient">Distributor</span>
         </h2>
         <div class="w-24 h-1 bg-golden mx-auto mb-6"></div>
         <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Trusted partnerships with leading global brands in industrial
-          solutions
+          We offer a diverse range of products to meet the machinery needs of various industrial sectors. Our selection includes trusted brands known for their reliability
         </p>
       </div>
 
@@ -29,9 +24,9 @@
         <!-- Featured Partners -->
         <!-- fix import grid col-start -->
         <!-- 
-          its not automaticly import grid col-start, when we use in calculation 
-          so we need to create a hidden grid to fix it
-        -->
+            its not automaticly import grid col-start, when we use in calculation 
+            so we need to create a hidden grid to fix it
+          -->
         <div class="grid grid-cols-1 md:grid-cols-6 gap-8 mb-16 hidden">
           <div class="group md:col-start-2 md:col-span-2">01</div>
           <div class="group md:col-span-2">01.2</div>
@@ -44,9 +39,7 @@
             :class="[
               'group',
               'md:col-span-2',
-              index == 0
-                  ? 'md:col-start-' + ((index * 2) + 2)
-                  : '',
+              index == 0 ? 'md:col-start-' + (index * 2 + 2) : '',
             ]"
           >
             <div
@@ -176,28 +169,6 @@
             </p>
           </div>
         </div>
-
-        <!-- CTA Section -->
-        <!-- <div
-          class="text-center mt-16 animate-fade-in-up"
-          style="animation-delay: 0.8s"
-        >
-          <div
-            class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 max-w-4xl mx-auto"
-          >
-            <h3 class="text-2xl font-montserrat font-bold text-white mb-4">
-              Interested in Partnership?
-            </h3>
-            <p class="text-gray-300 mb-6">
-              Join our network of trusted partners and expand your business
-              reach with our comprehensive support.
-            </p>
-            <NuxtLink to="/contact" class="btn-primary">
-              <Icon name="mdi:handshake" class="w-5 h-5 mr-2" />
-              Become a Partner
-            </NuxtLink>
-          </div>
-        </div> -->
       </div>
     </div>
   </section>
@@ -206,6 +177,17 @@
 <script setup>
 const partnerStore = usePartnerStore();
 await callOnce("partner-data", () => partnerStore.loadData());
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+  class: {
+    type: String,
+    required: false,
+  },
+});
 
 const partnershipBenefits = [
   {

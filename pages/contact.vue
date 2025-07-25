@@ -7,7 +7,7 @@
         <div class="absolute inset-0 bg-gradient-overlay z-10"></div>
         <div 
           class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+          :style="{ backgroundImage: `url(${heroBackground})` }"
         ></div>
         <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-10 z-5"></div>
       </div>
@@ -60,10 +60,10 @@
                 <div>
                   <h3 class="text-xl font-montserrat font-bold text-white mb-2">Our Location</h3>
                   <p class="text-gray-300">
-                    Kp. Rawa Bebek RT 03/RW 10<br>
-                    Kel. Kota Baru, Kec. Bekasi Barat<br>
-                    Bekasi, Jawa Barat 17133<br>
-                    Indonesia
+                    {{ companyStore.companyData.address.street }}<br>
+                    {{ companyStore.companyData.address.village }}, {{ companyStore.companyData.address.district }}<br>
+                    {{ companyStore.companyData.address.city }}, {{ companyStore.companyData.address.province }} {{ companyStore.companyData.address.postal_code }}<br>
+                    {{ companyStore.companyData.address.country }}
                   </p>
                 </div>
               </div>
@@ -76,12 +76,12 @@
                 <div>
                   <h3 class="text-xl font-montserrat font-bold text-white mb-2">Phone</h3>
                   <a 
-                    href="tel:+622122157327" 
+                    :href="`tel:${companyStore.companyData.phone}`" 
                     class="text-gray-300 hover:text-golden transition-colors duration-300"
                   >
-                    +62 21 2215 7327
+                    {{ companyStore.companyData.phone }}
                   </a>
-                  <p class="text-sm text-gray-400 mt-1">24/7 Emergency Support Available</p>
+                  <p class="text-sm text-gray-400 mt-1">Emergency Support Available</p>
                 </div>
               </div>
 
@@ -93,16 +93,17 @@
                 <div>
                   <h3 class="text-xl font-montserrat font-bold text-white mb-2">Email</h3>
                   <a 
-                    href="mailto:sales@nafitekglobal-ind.com" 
+                    :href="`mailto:${companyStore.companyData.email}`" 
                     class="text-gray-300 hover:text-golden transition-colors duration-300"
                   >
-                    sales@nafitekglobal-ind.com
+                    {{ companyStore.companyData.email }}
                   </a>
                   <p class="text-sm text-gray-400 mt-1">We respond within 24 hours</p>
                 </div>
               </div>
 
               <!-- WhatsApp -->
+              <!-- TODO: add whatsapp number
               <div class="flex items-start space-x-4">
                 <div class="w-12 h-12 bg-golden/20 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Icon name="heroicons:chat-bubble-left-right" class="w-6 h-6 text-golden" />
@@ -119,9 +120,11 @@
                   <p class="text-sm text-gray-400 mt-1">Quick response for urgent inquiries</p>
                 </div>
               </div>
+              -->
             </div>
 
             <!-- Business Hours -->
+            <!--
             <div class="mt-12 p-6 bg-gray-800/50 rounded-xl border border-gray-700">
               <h3 class="text-xl font-montserrat font-bold text-white mb-4">Business Hours</h3>
               <div class="space-y-2 text-gray-300">
@@ -139,6 +142,7 @@
                 </div>
               </div>
             </div>
+            -->
           </div>
 
           <!-- Contact Form -->
@@ -295,10 +299,10 @@
             </div>
             <h3 class="text-xl font-montserrat font-bold text-white mb-4">Emergency Support</h3>
             <p class="text-gray-300 mb-6">
-              Critical equipment failure? Our emergency response team is available 24/7.
+              Critical equipment failure? Our emergency response team is available.
             </p>
             <a 
-              href="tel:+622122157327"
+              :href="`tel:${companyStore.companyData.phone}`"
               class="inline-flex items-center px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all duration-300"
             >
               Call Now
@@ -324,7 +328,29 @@
             </button>
           </div>
 
+          <!-- email -->
+
+          <div class="card-industrial text-center animate-fade-in-up" style="animation-delay: 0.2s">
+            <div class="w-16 h-16 bg-green-600/20 rounded-xl flex items-center justify-center mx-auto mb-6">
+              <Icon name="heroicons:envelope" class="w-8 h-8 text-green-400" />
+            </div>
+            <h3 class="text-xl font-montserrat font-bold text-white mb-4">Email Us</h3>
+            <p class="text-gray-300 mb-6">
+              Quick questions? Email us directly for instant responses.
+            </p>
+            <a 
+              :href="`mailto:${companyStore.companyData.email}`"
+              target="_blank"
+              class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300"
+            >
+              Email Now
+              <Icon name="heroicons:arrow-top-right-on-square" class="w-5 h-5 ml-2" />
+            </a>
+          </div>
+
           <!-- WhatsApp Chat -->
+          <!-- TODO: add whatsapp number -->
+          <!--
           <div class="card-industrial text-center animate-fade-in-up" style="animation-delay: 0.2s">
             <div class="w-16 h-16 bg-green-600/20 rounded-xl flex items-center justify-center mx-auto mb-6">
               <Icon name="heroicons:chat-bubble-left-right" class="w-8 h-8 text-green-400" />
@@ -342,6 +368,7 @@
               <Icon name="heroicons:arrow-top-right-on-square" class="w-5 h-5 ml-2" />
             </a>
           </div>
+          -->
         </div>
       </div>
     </section>
@@ -367,11 +394,13 @@
                 <Icon name="heroicons:map-pin" class="w-16 h-16 text-golden mx-auto mb-4" />
                 <h3 class="text-xl font-montserrat font-bold text-white mb-2">Our Location</h3>
                 <p class="text-gray-300">
-                  Kp. Rawa Bebek RT 03/RW 10, Kel. Kota Baru<br>
-                  Kec. Bekasi Barat, Bekasi, Jawa Barat 17133
+                  {{ companyStore.companyData.address.street }}<br>
+                  {{ companyStore.companyData.address.village }}, {{ companyStore.companyData.address.district }}<br>
+                  {{ companyStore.companyData.address.city }}, {{ companyStore.companyData.address.province }} {{ companyStore.companyData.address.postal_code }}<br>
+                  {{ companyStore.companyData.address.country }}
                 </p>
                 <a 
-                  href="https://maps.google.com/?q=Kp.+Rawa+Bebek+RT+03/RW+10,+Kel.+Kota+Baru,+Kec.+Bekasi+Barat,+Bekasi,+Jawa+Barat+17133"
+                  :href="`https://maps.google.com/?q=${companyStore.companyData.address.street}, ${companyStore.companyData.address.village}, ${companyStore.companyData.address.district}, ${companyStore.companyData.address.city}, ${companyStore.companyData.address.province}, ${companyStore.companyData.address.postal_code}, ${companyStore.companyData.address.country}`"
                   target="_blank"
                   class="inline-flex items-center mt-4 px-6 py-3 bg-golden text-charcoal font-semibold rounded-lg hover:bg-golden-light transition-all duration-300"
                 >
@@ -388,6 +417,12 @@
 </template>
 
 <script setup>
+import heroBackground from "~/assets/images/office.png";
+
+// stores
+const companyStore = useCompanyStore();
+await callOnce('company-data', () => companyStore.loadData())
+
 import { ref } from 'vue'
 
 // Form data

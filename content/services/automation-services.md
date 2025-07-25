@@ -3,7 +3,7 @@ number: 4
 pinned: true
 name: Automation Services
 icon: mdi:robot
-image: https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80
+image: services/automation-services.png
 overview: We provide automation services aimed at improving the efficiency of industrial machinery. Our objective is to optimize machine performance through advanced technology, reducing the risk of downtime. By implementing integrated systems, we ensure that every process operates smoothly and efficiently, supporting continuous production.
 feature_cta: Our Automation Services Include
 feature_list:

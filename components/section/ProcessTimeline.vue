@@ -1,14 +1,11 @@
 <template>
   <section
+    :id="props.id"
+    :class="props.class"
     ref="sectionRef"
-    class="py-20 lg:py-32 bg-gradient-industrial relative overflow-hidden"
+    class="py-20 lg:py-32 relative overflow-hidden"
   >
-    <!-- Background Elements -->
-    <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
-    <div
-      class="absolute top-20 right-20 w-24 h-24 border border-golden/20 rotate-45 animate-pulse-slow"
-    ></div>
-
+    <slot name="prefix"></slot>
     <div class="container mx-auto px-4 lg:px-8">
       <!-- Section Header -->
       <div class="text-center mb-16">
@@ -167,37 +164,48 @@
 
         <!-- CTA Section -->
         <!-- <div
-          class="text-center mt-16 animate-fade-in-up"
-          style="animation-delay: 1s"
-        >
-          <div
-            class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 max-w-4xl mx-auto"
+            class="text-center mt-16 animate-fade-in-up"
+            style="animation-delay: 1s"
           >
-            <h3 class="text-2xl font-montserrat font-bold text-white mb-4">
-              Ready to Start Your Project?
-            </h3>
-            <p class="text-gray-300 mb-6">
-              Let's discuss your requirements and create a customized solution
-              for your industrial needs.
-            </p>
-            <NuxtLink to="/contact" class="btn-primary">
-              <Icon name="mdi:rocket-launch" class="w-5 h-5 mr-2" />
-              Start Your Journey
-            </NuxtLink>
-          </div>
-        </div> -->
+            <div
+              class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 max-w-4xl mx-auto"
+            >
+              <h3 class="text-2xl font-montserrat font-bold text-white mb-4">
+                Ready to Start Your Project?
+              </h3>
+              <p class="text-gray-300 mb-6">
+                Let's discuss your requirements and create a customized solution
+                for your industrial needs.
+              </p>
+              <NuxtLink to="/contact" class="btn-primary">
+                <Icon name="mdi:rocket-launch" class="w-5 h-5 mr-2" />
+                Start Your Journey
+              </NuxtLink>
+            </div>
+          </div> -->
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import { useIntersectionObserver } from "@vueuse/core";
+
 // stores
 const companyStore = useCompanyStore();
 await callOnce("company-data", () => companyStore.loadData());
 
-import { ref, onMounted } from "vue";
-import { useIntersectionObserver } from "@vueuse/core";
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+  class: {
+    type: String,
+    required: false,
+  },
+});
 
 const currentStep = ref(-1);
 const timelineProgress = ref(0);

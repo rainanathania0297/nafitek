@@ -152,13 +152,13 @@
         </h3>
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 max-w-4xl mx-auto">
           <div
-            v-for="(industry, index) in industries"
-            :key="industry"
+            v-for="(industry, index) in companyStore.companyStats?.industry_fields"
+            :key="industry.name"
             class="text-center animate-fade-in-up"
             :style="{ animationDelay: `${index * 0.1}s` }"
           >
             <div class="text-gray-400 hover:text-golden transition-colors duration-300 text-sm font-medium">
-              {{ industry }}
+              {{ industry.name }}
             </div>
           </div>
         </div>
@@ -209,15 +209,6 @@ const metrics = [
 ]
 
 const testimonials = computed(() => testimonialStore.testimonialList || [])
-
-const industries = [
-  'Automotive',
-  'Electronics',
-  'Semiconductor',
-  'Manufacturing',
-  'Chemical',
-  'Pharmaceutical'
-]
 
 const visibleTestimonials = computed(() => {
   return testimonials.value.slice(currentTestimonialIndex.value, currentTestimonialIndex.value + 2)

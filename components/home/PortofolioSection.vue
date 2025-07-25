@@ -136,7 +136,7 @@
       </div>
 
       <!-- CTA Section -->
-      <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s">
+      <!-- <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s">
         <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 max-w-4xl mx-auto">
           <h3 class="text-2xl font-montserrat font-bold text-white mb-4">
             Ready to Start Your Project?
@@ -155,7 +155,7 @@
             </NuxtLink>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- Project Modal -->

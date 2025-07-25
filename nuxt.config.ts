@@ -97,6 +97,13 @@ export default defineNuxtConfig({
           quality: 85,
           width: 400,
         }
+      },
+      process: {
+        modifiers: {
+          format: 'webp',
+          quality: 85,
+          width: 500,
+        }
       }
     }
   },

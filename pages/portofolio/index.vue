@@ -241,7 +241,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           <div
-            v-for="(industry, index) in industries"
+            v-for="(industry, index) in companyStore.companyStats?.industry_fields"
             :key="industry.name"
             class="text-center animate-fade-in-up"
             :style="{ animationDelay: `${index * 0.1}s` }"
@@ -403,16 +403,6 @@ const categories = computed(() => {
   return ["All", ...portofolioStore.categoryList];
 });
 
-// Industries
-const industries = [
-  { name: "Automotive", icon: "heroicons:truck" },
-  { name: "Electronics", icon: "heroicons:cpu-chip" },
-  { name: "Semiconductor", icon: "mdi:integrated-circuit-chip" },
-  { name: "Manufacturing", icon: "heroicons:cog-6-tooth" },
-  { name: "Chemical", icon: "heroicons:beaker" },
-  { name: "Pharmaceutical", icon: "heroicons:heart" },
-];
-
 const projectList = computed(() => {
   return portofolioStore.portofolioList;
 });
@@ -484,12 +474,3 @@ useHead({
   ],
 });
 </script>
-
-<style scoped>
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>

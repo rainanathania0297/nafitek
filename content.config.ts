@@ -1,14 +1,28 @@
-import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+import { defineCollection, defineContentConfig, z } from "@nuxt/content";
 
 export default defineContentConfig({
   // https://content.nuxt.com/docs/api/configuration
   collections: {
     company: defineCollection({
-      source: 'company.yml',
-      type: 'data',
+      source: "company.yml",
+      type: "data",
       schema: z.object({
         name: z.string(),
-        year_experience: z.number(),
+        address: z.object({
+          street: z.string(),
+          village: z.string(),
+          district: z.string(),
+          city: z.string(),
+          province: z.string(),
+          country: z.string(),
+          postal_code: z.string(),
+        }),
+        phone: z.string(),
+        email: z.string(),
+        about: z.array(z.string()),
+        vision: z.array(z.string()),
+        mission: z.array(z.string()),
+        year_established: z.number(),
         client_total: z.number(),
         client_statisfaction: z.number(),
         project_total: z.number(),
@@ -16,18 +30,44 @@ export default defineContentConfig({
         project_ontime_percentage: z.number(),
         machine_total: z.number(),
         industry_served: z.number(),
-        strengths: z.array(z.object({
-          number: z.number(),
-          icon: z.string(),
-          name: z.string(),
-          description: z.string(),
-          features: z.array(z.string()),
-        })),
-      })
+        industry_fields: z.array(
+          z.object({
+            name: z.string(),
+            icon: z.string(),
+          })
+        ),
+        strengths: z.array(
+          z.object({
+            number: z.number(),
+            icon: z.string(),
+            name: z.string(),
+            description: z.string(),
+            features: z.array(z.string()),
+          })
+        ),
+        processes: z.object({
+          steps: z.array(
+            z.object({
+              number: z.number(),
+              icon: z.string(),
+              name: z.string(),
+              description: z.string(),
+              image: z.string(),
+            })
+          ),
+          benefits: z.array(
+            z.object({
+              title: z.string(),
+              icon: z.string(),
+              description: z.string(),
+            })
+          ),
+        }),
+      }),
     }),
     services: defineCollection({
-      source: 'services/**/*.{md,yaml,yml}',
-      type: 'page',
+      source: "services/**/*.{md,yaml,yml}",
+      type: "page",
       schema: z.object({
         number: z.number(),
         pinned: z.boolean(),
@@ -39,11 +79,11 @@ export default defineContentConfig({
         feature_cta: z.string(),
         feature_list: z.array(z.string()),
         cta_text: z.string(),
-      })
+      }),
     }),
     partners: defineCollection({
-      source: 'partners/**/*.{md,yaml,yml}',
-      type: 'data',
+      source: "partners/**/*.{md,yaml,yml}",
+      type: "data",
       schema: z.object({
         name: z.string(),
         logo: z.string(),
@@ -51,11 +91,11 @@ export default defineContentConfig({
         products: z.array(z.string()),
         link: z.string(),
         pinned: z.boolean(),
-      })
+      }),
     }),
     portofolio: defineCollection({
-      source: 'portofolio/**/*.{md,yaml,yml}',
-      type: 'page',
+      source: "portofolio/**/*.{md,yaml,yml}",
+      type: "page",
       schema: z.object({
         date: z.string(),
         title: z.string(),
@@ -68,11 +108,11 @@ export default defineContentConfig({
         project_location: z.string(),
         project_duration: z.string(),
         project_solution: z.string(),
-      })
+      }),
     }),
     testimonials: defineCollection({
-      source: 'testimonials/**/*.{md,yaml,yml}',
-      type: 'data',
+      source: "testimonials/**/*.{md,yaml,yml}",
+      type: "data",
       schema: z.object({
         name: z.string(),
         company: z.string(),
@@ -81,11 +121,11 @@ export default defineContentConfig({
         project: z.string(),
         message: z.string(),
         rating: z.number(),
-      })
+      }),
     }),
     article: defineCollection({
-      source: 'article/**/*.{md,yaml,yml}',
-      type: 'page',
+      source: "article/**/*.{md,yaml,yml}",
+      type: "page",
       schema: z.object({
         date: z.string(),
         author: z.string(),
@@ -95,18 +135,18 @@ export default defineContentConfig({
         overview: z.string(),
         readTime: z.number(),
         featured: z.boolean(),
-      })
+      }),
     }),
     clients: defineCollection({
-      source: 'clients/**/*.{md,yaml,yml}',
-      type: 'data',
+      source: "clients/**/*.{md,yaml,yml}",
+      type: "data",
       schema: z.object({
         name: z.string(),
         logo: z.string(),
         industry: z.string(),
         description: z.string(),
         featured: z.boolean(),
-      })
+      }),
     }),
-  }
-})
+  },
+});
