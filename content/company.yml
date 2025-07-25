@@ -1,5 +1,25 @@
 name: "PT Nafitek Global Indonesia"
-year_experience: 6
+address:
+  street: "Jl. Raya Sukamahi No.115"
+  village: "Sukamahi"
+  district: "Kec. Cikarang Pusat"
+  city: "Kab. Bekasi"
+  province: "Jawa Barat"
+  country: "Indonesia"
+  postal_code: "17531"
+phone: "+62 21 2215 7327"
+email: "sales@nafitekglobal-ind.com"
+about:
+ - PT Nafitek Global Indonesia is a trusted provider industrial trading in electrical or mechanical, machinery procurement, automation solution and preventive maintenance services.
+ - Our specialize in advanced vacuum repair solutions, troubleshooting and helium leak check systems.
+ - We are committed to being a reliable partner and advisor, supporting our clients in elevating their business performance and operational excellence. With a clear sense of purpose and determination, we continue to innovate and adapt in a dynamic competitive industry. Our team professionals skills is dedicated to delivering services to meet each client's unique needs and expectations.
+vision:
+ - Focusing on customers by delivering high levels of satisfaction.
+mission:
+ - Providing high-quality products and ensuring timely delivery to our customers.
+ - Establishing mutually beneficial partnerships with all stakeholders.
+ - Prioritizing safety and enhancing the skills of all employees.
+year_established: 2018
 client_total: 100
 client_statisfaction: 90
 project_total: 150
@@ -7,6 +27,21 @@ project_success_percentage: 98
 project_ontime_percentage: 99
 machine_total: 500
 industry_served: 50
+industry_fields:
+  - name: "Packaging"
+    icon: "mdi:package"
+  - name: "Food & Beverage"
+    icon: "mdi:food-variant"
+  - name: "Pharmaceutical"
+    icon: "mdi:medical-bag"
+  - name: "Plastic"
+    icon: "mdi:package"
+  - name: "Automotive"
+    icon: "mdi:car"
+  - name: "Electronic"
+    icon: "mdi:lightning-bolt"
+  - name: "Semiconductor"
+    icon: "mdi:chip"
 strengths:
   - number: 1
     icon: "mdi:cog-box"
@@ -62,3 +97,40 @@ strengths:
       - "Innovative solutions"
       - "Continuous improvement"
       - "Future-ready approach"
+processes:
+  steps:
+    - number: 1
+      icon: "mdi:face-agent"
+      image: "process/initial-consultation.jpeg"
+      name: "Initial Consultation"
+      description: "We discuss your requirements and provide initial recommendations."
+    - number: 2
+      icon: "mdi:lightbulb-on"
+      image: "process/technical-assessment.jpeg"
+      name: "Technical Assessment"
+      description: "A thorough technical evaluation is conducted."
+    - number: 3
+      icon: "mdi:file-document-edit"
+      image: "process/proposal-and-planning.jpeg"
+      name: "Proposal and Planning"
+      description: "We prepare a comprehensive proposal with timeline."
+    - number: 4
+      icon: "mdi:cog-play"
+      image: "process/implementation.jpeg"
+      name: "Implementation"
+      description: "Our Skilled team execute the project"
+    - number: 5
+      icon: "mdi:check-circle"
+      image: "process/delivery-and-support.jpeg"
+      name: "Delivery and Support"
+      description: "Final testing, training, and support are provided."
+  benefits:
+    - title: "Transparent Communication"
+      icon: "mdi:message-text"
+      description: "Regular updates and clear communication throughout every phase of your project."
+    - title: "Quality Assurance"
+      icon: "mdi:shield-check"
+      description: "Rigorous testing and quality control measures to ensure exceptional results."
+    - title: "Timely Delivery"
+      icon: "mdi:clock-check"
+      description: "Committed to meeting deadlines and delivering projects on schedule."

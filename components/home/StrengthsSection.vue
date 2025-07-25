@@ -69,7 +69,7 @@
       </div>
 
       <!-- Call to Action -->
-      <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s">
+      <!-- <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s">
         <p class="text-gray-300 mb-8 text-lg">
           Ready to experience our exceptional service quality?
         </p>
@@ -77,7 +77,7 @@
           <Icon name="mdi:rocket-launch" class="w-5 h-5 mr-2" />
           Start Your Project
         </NuxtLink>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>

@@ -25,7 +25,7 @@
             About <span class="text-gradient">{{ companyStore.companyName }}</span>
           </h1>
           <p class="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s">
-            Leading the way in industrial excellence since 2018
+            Leading the way in industrial excellence since {{ companyStore.companyStats.year_established }}
           </p>
         </div>
       </div>
@@ -47,28 +47,13 @@
             </div>
             
             <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
-              <p>
-                PT Nafitek Global Indonesia is a company that provides high-quality machinery procurement, 
-                maintenance, and repair services. Since our founding in early January 2018, we have been 
-                committed to being a trusted partner and advisor to our clients, helping them enhance 
-                their business competitiveness.
-              </p>
-              
-              <p>
-                With a strong drive and determination, we strive to stay ahead in an increasingly 
-                competitive industry. Our team of skilled and experienced professionals is dedicated 
-                to delivering outstanding services tailored to our client's specific needs and requirements.
-              </p>
-              
-              <p>
-                PT Nafitek Global Indonesia recognizes that there are still areas for improvement and 
-                remains dedicated to continuous development, always aiming to deliver the best 
-                performance in the future.
-              </p>
+              <template v-for="(item, index) in companyStore.companyData?.about" :key="index">
+                <p>{{ item }}</p>
+              </template>
             </div>
 
             <!-- Key Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+            <!-- <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
               <div class="text-center">
                 <div class="text-3xl font-bold text-golden mb-2">
                   <AnimatedCounter :target="companyStore.companyStats?.machine_total" suffix="+" />
@@ -93,15 +78,15 @@
                 </div>
                 <p class="text-gray-400 text-sm">Client Satisfaction</p>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <!-- Image -->
           <div class="animate-fade-in-right">
             <div class="relative">
               <NuxtImg
-                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                alt="Industrial machinery and equipment"
+                src="office.png"
+                alt="PT Nafitek Global Indonesia Office"
                 class="w-full h-[500px] object-cover rounded-2xl shadow-industrial"
                 loading="lazy"
               />
@@ -142,9 +127,12 @@
               </div>
               <h3 class="text-2xl font-montserrat font-bold text-white mb-4">Our Vision</h3>
             </div>
-            <p class="text-lg text-gray-300 text-center leading-relaxed">
-              To prioritize customer satisfaction by providing exceptional value.
-            </p>
+            <template v-for="(item, index) in companyStore.companyData?.vision" :key="index">
+              <p :class="[
+                'text-lg text-gray-300 text-center leading-relaxed',
+                index == companyStore.companyData?.vision.length - 1 ? 'mb-0' : 'mb-6',
+              ]">{{ item }}</p>
+            </template>
           </div>
 
           <!-- Mission -->
@@ -156,18 +144,12 @@
               <h3 class="text-2xl font-montserrat font-bold text-white mb-4">Our Mission</h3>
             </div>
             <ul class="space-y-4 text-gray-300">
-              <li class="flex items-start">
-                <Icon name="heroicons:check-circle" class="w-6 h-6 text-golden mr-3 mt-0.5 flex-shrink-0" />
-                <span>Deliver high-quality products to customers on time</span>
-              </li>
-              <li class="flex items-start">
-                <Icon name="heroicons:check-circle" class="w-6 h-6 text-golden mr-3 mt-0.5 flex-shrink-0" />
-                <span>Foster partnerships that benefit all stakeholders</span>
-              </li>
-              <li class="flex items-start">
-                <Icon name="heroicons:check-circle" class="w-6 h-6 text-golden mr-3 mt-0.5 flex-shrink-0" />
-                <span>Prioritize safety while continuously improving</span>
-              </li>
+              <template v-for="(item, index) in companyStore.companyData?.mission" :key="index">
+                <li class="flex items-start">
+                  <Icon name="heroicons:check-circle" class="w-6 h-6 text-golden mr-3 mt-0.5 flex-shrink-0" />
+                  <span>{{ item }}</span>
+                </li>
+              </template>
             </ul>
           </div>
         </div>
@@ -175,6 +157,7 @@
     </section>
 
     <!-- Team Section -->
+    <!--
     <section class="py-20 lg:py-32 bg-charcoal relative overflow-hidden">
       <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
       
@@ -190,7 +173,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <!-- Team Member 1 -->
           <div class="card-industrial text-center animate-fade-in-up">
             <div class="w-24 h-24 bg-golden/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <Icon name="heroicons:user" class="w-12 h-12 text-golden" />
@@ -203,7 +185,6 @@
             </p>
           </div>
 
-          <!-- Team Member 2 -->
           <div class="card-industrial text-center animate-fade-in-up" style="animation-delay: 0.1s">
             <div class="w-24 h-24 bg-golden/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <Icon name="heroicons:cog-6-tooth" class="w-12 h-12 text-golden" />
@@ -216,7 +197,6 @@
             </p>
           </div>
 
-          <!-- Team Member 3 -->
           <div class="card-industrial text-center animate-fade-in-up" style="animation-delay: 0.2s">
             <div class="w-24 h-24 bg-golden/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <Icon name="heroicons:phone" class="w-12 h-12 text-golden" />
@@ -231,9 +211,10 @@
         </div>
       </div>
     </section>
+    -->
 
     <!-- Values Section -->
-    <section class="py-20 lg:py-32 bg-gradient-industrial relative overflow-hidden">
+    <section class="py-20 lg:py-32 bg-charcoal relative overflow-hidden">
       <div class="container mx-auto px-4 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="text-4xl md:text-5xl font-montserrat font-bold text-white mb-6">
@@ -322,8 +303,11 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-charcoal relative overflow-hidden">
+    <section class="py-20 bg-gradient-industrial relative overflow-hidden">
       <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
+      <div
+        class="absolute top-20 right-10 w-32 h-32 border border-golden/20 rotate-45 animate-pulse-slow"
+      ></div>
       
       <div class="container mx-auto px-4 lg:px-8">
         <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s">

@@ -6,8 +6,8 @@
       <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-overlay z-10"></div>
         <div 
-          class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style="background-image: url('https://images.unsplash.com/photo-1565514020179-026b92b84bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+          class="absolute inset-0 bg-cover bg-top bg-no-repeat"
+          :style="{ backgroundImage: `url(${heroBackground})` }"
         ></div>
         <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-10 z-5"></div>
       </div>
@@ -119,7 +119,7 @@
           <!-- Image -->
           <div class="animate-fade-in-right">
             <NuxtImg
-              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              :src="vacuumPumpService.image"
               alt="Vacuum pump maintenance and repair"
               class="w-full h-[500px] object-cover rounded-2xl shadow-industrial"
               loading="lazy"
@@ -144,8 +144,25 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          <div v-for="partner in partnerStore.pinnedPartnerList" :key="partner.id" class="card-industrial text-center animate-fade-in-up">
+        <!-- fix import grid col-start -->
+        <!-- 
+          its not automaticly import grid col-start, when we use in calculation 
+          so we need to create a hidden grid to fix it
+        -->
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-8 mb-16 hidden">
+          <div class="group md:col-start-2 md:col-span-2">01</div>
+          <div class="group md:col-span-2">01.2</div>
+        </div>
+        <!-- end fix import grid col-start -->
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-8 mb-16">
+          <div 
+            v-for="(partner, index) in partnerStore.pinnedPartnerList" 
+            :key="partner.id" 
+            :class="[
+              'card-industrial text-center animate-fade-in-up',
+              'md:col-span-2',
+              index == 0 ? 'md:col-start-2' : '',
+            ]">
             <div class="w-20 h-20 bg-golden/20 rounded-xl flex items-center justify-center mx-auto mb-6">
               <template v-if="partner.logo">
                 <NuxtImg
@@ -237,120 +254,40 @@
           <!-- Timeline Line -->
           <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-golden via-golden to-transparent"></div>
           
-          <!-- Step 1 -->
-          <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start mb-16 animate-fade-in-up">
-            <div class="flex-1 md:text-right md:pr-8 mb-6 md:mb-0">
-              <h3 class="text-2xl font-montserrat font-bold text-white mb-3">Consultation</h3>
-              <p class="text-gray-300">
-                We begin with a thorough consultation to understand your specific requirements, challenges, and objectives. 
-                Our team of experts works closely with you to identify the most effective solutions for your needs.
-              </p>
+          <template v-for="(step, index) in companyStore.companyProcesses?.steps" :key="index">
+            <div 
+              :class="[
+                'relative z-10 flex flex-col items-center md:items-start mb-16 animate-fade-in-up',
+                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse',
+              ]"
+              :style="{ animationDelay: `${index * 0.2}s` }"
+            >
+              <div 
+                :class="[
+                  'flex-1 mb-6 md:mb-0',
+                  index % 2 === 0 ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8',
+                ]"
+              >
+                <h3 class="text-2xl font-montserrat font-bold text-white mb-3">{{ step.name }}</h3>
+                <p class="text-gray-300">{{ step.description }}</p>
+              </div>
+              <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center z-20 mx-4">
+                <span class="text-charcoal font-bold">{{ step.number }}</span>
+              </div>
+              <div :class="[
+                'flex-1',
+                index % 2 === 0 ? 'md:pl-8' : 'md:pr-8',
+              ]">
+                <NuxtImg 
+                  preset="process"
+                  :src="step.image" 
+                  :alt="step.name" 
+                  class="w-full h-48 object-cover rounded-xl shadow-lg" 
+                  loading="lazy"
+                />
+              </div>
             </div>
-            
-            <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center z-20 mx-4">
-              <span class="text-charcoal font-bold">1</span>
-            </div>
-            
-            <div class="flex-1 md:pl-8">
-              <img 
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Consultation" 
-                class="w-full h-48 object-cover rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
-          
-          <!-- Step 2 -->
-          <div class="relative z-10 flex flex-col md:flex-row-reverse items-center md:items-start mb-16 animate-fade-in-up" style="animation-delay: 0.2s">
-            <div class="flex-1 md:text-left md:pl-8 mb-6 md:mb-0">
-              <h3 class="text-2xl font-montserrat font-bold text-white mb-3">Design & Planning</h3>
-              <p class="text-gray-300">
-                Based on the consultation, we develop a detailed design and implementation plan. This includes technical 
-                specifications, timelines, resource allocation, and budget considerations to ensure a smooth execution.
-              </p>
-            </div>
-            
-            <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center z-20 mx-4">
-              <span class="text-charcoal font-bold">2</span>
-            </div>
-            
-            <div class="flex-1 md:pr-8">
-              <img 
-                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Design & Planning" 
-                class="w-full h-48 object-cover rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
-          
-          <!-- Step 3 -->
-          <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start mb-16 animate-fade-in-up" style="animation-delay: 0.3s">
-            <div class="flex-1 md:text-right md:pr-8 mb-6 md:mb-0">
-              <h3 class="text-2xl font-montserrat font-bold text-white mb-3">Implementation</h3>
-              <p class="text-gray-300">
-                Our skilled team executes the plan with precision and attention to detail. Whether it's installing equipment, 
-                implementing automation systems, or providing components, we ensure high-quality workmanship and minimal disruption.
-              </p>
-            </div>
-            
-            <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center z-20 mx-4">
-              <span class="text-charcoal font-bold">3</span>
-            </div>
-            
-            <div class="flex-1 md:pl-8">
-              <img 
-                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Implementation" 
-                class="w-full h-48 object-cover rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
-          
-          <!-- Step 4 -->
-          <div class="relative z-10 flex flex-col md:flex-row-reverse items-center md:items-start mb-16 animate-fade-in-up" style="animation-delay: 0.4s">
-            <div class="flex-1 md:text-left md:pl-8 mb-6 md:mb-0">
-              <h3 class="text-2xl font-montserrat font-bold text-white mb-3">Testing & Validation</h3>
-              <p class="text-gray-300">
-                We conduct thorough testing and validation to ensure that all systems and components meet the specified 
-                requirements and performance standards. This includes functional testing, quality checks, and safety verification.
-              </p>
-            </div>
-            
-            <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center z-20 mx-4">
-              <span class="text-charcoal font-bold">4</span>
-            </div>
-            
-            <div class="flex-1 md:pr-8">
-              <img 
-                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Testing & Validation" 
-                class="w-full h-48 object-cover rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
-          
-          <!-- Step 5 -->
-          <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start animate-fade-in-up" style="animation-delay: 0.5s">
-            <div class="flex-1 md:text-right md:pr-8 mb-6 md:mb-0">
-              <h3 class="text-2xl font-montserrat font-bold text-white mb-3">Ongoing Support</h3>
-              <p class="text-gray-300">
-                Our commitment doesn't end with implementation. We provide comprehensive ongoing support, including maintenance, 
-                troubleshooting, training, and continuous improvement to ensure long-term success and optimal performance.
-              </p>
-            </div>
-            
-            <div class="w-12 h-12 bg-golden rounded-full flex items-center justify-center z-20 mx-4">
-              <span class="text-charcoal font-bold">5</span>
-            </div>
-            
-            <div class="flex-1 md:pl-8">
-              <img 
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Ongoing Support" 
-                class="w-full h-48 object-cover rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
+          </template>
         </div>
       </div>
     </section>
@@ -386,9 +323,13 @@
 </template>
 
 <script setup>
+import heroBackground from "~/assets/images/page-services.png";
+
 // stores
+const companyStore = useCompanyStore();
 const serviceStore = useServiceStore();
 const partnerStore = usePartnerStore();
+await callOnce("company-data", () => companyStore.loadData());
 await callOnce('service-data', () => serviceStore.loadData());
 await callOnce('partner-data', () => partnerStore.loadData());
 

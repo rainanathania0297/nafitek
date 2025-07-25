@@ -3,7 +3,7 @@ number: 3
 pinned: true
 name: Maintenance & Repair
 icon: mdi:wrench
-image: https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80
+image: services/maintenance-and-repair.png
 overview: We offer comprehensive maintenance and repair services for machines to keep your equipment operating at peak performance. Our skilled team is prepared to address a diverse range of issues, ranging from routine and scheduled maintenance to emergency repairs. We are committed to ensuring that your machines function optimally and to preventing any disruptions in productivity caused by equipment failures.
 feature_cta: Our Services Include
 feature_list:
