@@ -83,7 +83,7 @@
                   3.3 Emergency Services
                 </h3>
                 <p>
-                  Emergency support services are available 24/7 for critical
+                  Emergency support services are available for critical
                   equipment failures. Emergency service rates and response times
                   are specified in separate service agreements.
                 </p>

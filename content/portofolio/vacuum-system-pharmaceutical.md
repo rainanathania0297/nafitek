@@ -87,7 +87,7 @@ The vacuum system upgrade delivered significant improvements:
 ## Ongoing Support
 PT Nafitek Global Indonesia continues to support this installation with:
 - Quarterly preventive maintenance program
-- 24/7 emergency support
+- emergency support
 - Performance monitoring and optimization
 - Spare parts management
 - Annual system validation

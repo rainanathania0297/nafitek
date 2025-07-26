@@ -125,6 +125,7 @@ const navigationItems = [
   // { name: 'Home', href: '/' },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
+  { name: "Products", href: "/products" },
   // { name: 'Portofolio', href: '/portofolio' },
   // { name: 'Blog', href: '/blog' },
   { name: "Contact", href: "/contact" },

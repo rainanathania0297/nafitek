@@ -106,6 +106,7 @@
 
         <!-- All Partners Logo Grid -->
         <div
+          v-if="showAll"
           class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-gray-700"
         >
           <h3
@@ -149,7 +150,10 @@
         </div>
 
         <!-- Partnership Benefits -->
-        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div 
+          v-if="showBenefit"
+          class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           <div
             v-for="(benefit, index) in partnershipBenefits"
             :key="benefit.title"
@@ -187,6 +191,15 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  showAll: {
+    type: Boolean,
+    required: false,
+  },
+  showBenefit: {
+    type: Boolean,
+    required: false,
+    default: true
+  }
 });
 
 const partnershipBenefits = [

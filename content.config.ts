@@ -81,6 +81,25 @@ export default defineContentConfig({
         cta_text: z.string(),
       }),
     }),
+    products: defineCollection({
+      source: "products/**/*.{md,yaml,yml}",
+      type: "page",
+      schema: z.object({
+        number: z.number(),
+        name: z.string(),
+        description: z.string(),
+        icon: z.string(),
+        image: z.string(),
+        pinned: z.boolean().optional(),
+        categories: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            items: z.array(z.string()),
+          })
+        ),
+      }),
+    }),
     partners: defineCollection({
       source: "partners/**/*.{md,yaml,yml}",
       type: "data",

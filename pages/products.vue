@@ -8,7 +8,7 @@
       <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-overlay z-10"></div>
         <div
-          class="absolute inset-0 bg-cover bg-top bg-no-repeat"
+          class="absolute inset-0 bg-cover bg-center bg-no-repeat"
           :style="{ backgroundImage: `url(${heroBackground})` }"
         ></div>
         <div
@@ -32,70 +32,90 @@
           <h1
             class="text-5xl md:text-6xl font-montserrat font-bold text-white mb-6 animate-fade-in-up"
           >
-            Our <span class="text-gradient">Services</span>
+            Our <span class="text-gradient">Products</span>
           </h1>
           <p
             class="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto animate-fade-in-up"
             style="animation-delay: 0.2s"
           >
-            Comprehensive industrial solutions tailored to your business needs
+            High-quality components and parts for various industrial
+            applications
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Services Overview -->
-    <section class="py-20 lg:py-32 bg-charcoal relative overflow-hidden">
-      <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
+    <!-- Authorized Distributor Section -->
+    <SectionAuthorizedDistributor
+      id="authorized-distributor"
+      class="bg-charcoal"
+    >
+      <template #prefix>
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5" />
+      </template>
+    </SectionAuthorizedDistributor>
+
+    <!-- Components & Parts Supply Section -->
+    <section
+      id="components-parts-supply"
+      class="py-20 lg:pt-32 lg:pb-6 bg-gradient-industrial relative overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-grid opacity-5"></div>
+      <div
+        class="absolute top-20 right-10 w-32 h-32 border border-golden/20 rotate-45 animate-pulse-slow"
+      ></div>
 
       <div class="container mx-auto px-4 lg:px-8">
         <div class="text-center mb-16">
           <h2
             class="text-4xl md:text-5xl font-montserrat font-bold text-white mb-6"
           >
-            Complete <span class="text-gradient">Industrial Solutions</span>
+            Components & <span class="text-gradient">Parts Supply</span>
           </h2>
           <div class="w-24 h-1 bg-golden mx-auto mb-6"></div>
           <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-            From machinery procurement to automation services, we provide
-            end-to-end solutions for your industrial needs
+            Provide original quality spare parts and components for various
+            industry, ensuring optimal performance and longevity of equipment.
           </p>
         </div>
 
-        <!-- Service Overview -->
+        <!-- Product Icons -->
         <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-5xl mx-auto mb-16"
         >
           <a
-            v-for="(service, index) in serviceStore.serviceList"
-            :key="service.name"
-            :href="'#' + service.slug"
+            v-for="(product, index) in productStore.productList"
+            :key="product.name"
+            :href="'#' + product.slug"
             class="group text-center animate-fade-in-up mb-6"
             :style="{ animationDelay: `${index * 0.1}s` }"
           >
             <div
               class="w-16 h-16 bg-golden/20 rounded-xl flex items-center justify-center mx-auto mb-4 hover:bg-golden/30 hover:scale-105 transition-all duration-300"
             >
-              <Icon :name="service.icon" class="w-8 h-8 text-golden" />
+              <Icon :name="product.icon" class="w-8 h-8 text-golden" />
             </div>
-            <h3 class="text-white font-medium">{{ service.name }}</h3>
+            <h3 class="text-white font-medium">{{ product.name }}</h3>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Service List Section-->
+    <!-- Individual Product Category Sections -->
     <section
-      v-for="(service, index) in serviceStore.serviceList"
-      :key="service.id"
-      :id="service.slug"
-      class="py-20 lg:py-32 relative overflow-hidden"
-      :class="[index % 2 === 0 ? 'bg-gradient-industrial' : 'bg-charcoal']"
+      v-for="(product, index) in productStore.productList"
+      :key="product.id"
+      :id="product.slug"
+      class="py-20 lg:py-28 bg-charcoal relative overflow-hidden"
     >
       <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
-      <div
-        class="absolute top-20 right-20 w-24 h-24 border border-golden/20 rotate-45 animate-pulse-slow"
+      <!-- <div
+        class="absolute top-10 left-10 w-16 h-16 border border-golden/20 rotate-45 animate-pulse-slow"
       ></div>
+      <div
+        class="absolute bottom-10 right-10 w-20 h-20 bg-golden/10 rotate-12 animate-float"
+      ></div> -->
 
       <div class="container mx-auto px-4 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -110,38 +130,33 @@
             <h2
               class="text-4xl md:text-5xl font-montserrat font-bold text-white mb-6"
             >
-              {{ service.nameParts.name }}
-              <span class="text-gradient">{{ service.nameParts.rest }}</span>
+              {{ product.nameParts.name }} <span class="text-gradient">{{ product.nameParts.rest }}</span>
             </h2>
             <div class="w-24 h-1 bg-golden mb-6"></div>
 
             <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-              {{ service.overview }}
+              {{ product.description }}
             </p>
 
-            <div class="mb-8">
-              <h3 class="text-xl font-montserrat font-bold text-white mb-4">
-                {{ service.feature_cta }}
-              </h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              v-for="category in product.categories"
+              :key="category.id"
+              class="mb-8"
+            >
+              <h4 class="text-xl font-semibold text-golden mb-4">
+                {{ category.name }}
+              </h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div
-                  v-for="brand in service.feature_list"
-                  :key="brand"
-                  class="flex items-center space-x-3"
+                  v-for="item in category.items"
+                  :key="item"
+                  class="flex items-start"
                 >
                   <Icon
                     name="heroicons:check-circle"
-                    class="w-5 h-5 text-golden flex-shrink-0"
+                    class="w-5 h-5 text-golden mr-2 mt-0.5 flex-shrink-0"
                   />
-                  <NuxtImg
-                    v-if="brand.image"
-                    :preset="brand.image.includes('.svg') ? undefined : 'brand'"
-                    :src="brand.image"
-                    :alt="brand.name"
-                    class="w-auto h-8 filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
-                    loading="lazy"
-                  />
-                  <span v-else class="text-gray-300">{{ brand.name }}</span>
+                  <span class="text-gray-300">{{ item }}</span>
                 </div>
               </div>
             </div>
@@ -150,7 +165,7 @@
               to="/contact"
               class="inline-flex items-center px-8 py-4 bg-golden text-charcoal font-bold rounded-lg hover:bg-golden-light transition-all duration-300 hover:scale-105"
             >
-              {{ service.cta_text }}
+              Request Quote
               <Icon name="heroicons:arrow-right" class="w-5 h-5 ml-2" />
             </NuxtLink>
           </div>
@@ -163,31 +178,23 @@
                 : 'animate-fade-in-left order-2 lg:order-1'
             "
           >
-            <NuxtImg
-              :src="service.image"
-              :alt="service.name"
-              class="w-full h-[500px] object-cover rounded-2xl shadow-industrial hover:scale-110 transition-transform duration-500"
-              loading="lazy"
-            />
+            <div class="overflow-hidden rounded-xl">
+              <NuxtImg
+                :src="product.image"
+                :alt="product.name"
+                class="w-full object-cover hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Process Section -->
-    <SectionProcessTimelineImage
-      id="service-timeline"
-      class="bg-gradient-industrial"
-    >
-      <template #prefix>
-        <div
-          class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"
-        ></div>
-      </template>
-    </SectionProcessTimelineImage>
+    <!-- Additional sections are now generated dynamically in the loop above -->
 
     <!-- CTA Section -->
-    <section class="py-20 bg-charcoal relative overflow-hidden">
+    <section class="py-20 bg-gradient-industrial relative overflow-hidden">
       <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
 
       <div class="container mx-auto px-4 lg:px-8">
@@ -201,21 +208,21 @@
             <h2
               class="text-3xl md:text-4xl font-montserrat font-bold text-white mb-6"
             >
-              Ready to Enhance Your
-              <span class="text-gradient">Industrial Operations?</span>
+              Need <span class="text-gradient">Specific Components</span> for
+              Your Project?
             </h2>
             <p class="text-xl text-gray-300 mb-8">
-              Contact us today to discuss how our services can help you improve
-              efficiency, reduce costs, and achieve your business goals
+              Contact our team to discuss your requirements and get a customized
+              quote for high-quality industrial components and parts.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <NuxtLink to="/contact" class="btn-primary">
                 <Icon name="mdi:phone" class="w-5 h-5 mr-2" />
                 Request a Quote
               </NuxtLink>
-              <NuxtLink to="/portofolio" class="btn-default">
+              <NuxtLink to="/services" class="btn-default">
                 <Icon name="mdi:view-list" class="w-5 h-5 mr-2" />
-                View Our Portofolio
+                View Our Services
               </NuxtLink>
             </div>
           </div>
@@ -226,38 +233,41 @@
 </template>
 
 <script setup>
-import heroBackground from "~/assets/images/page-services.png";
+import heroBackground from "~/assets/images/page-products.png";
+import { useProductStore } from "~/stores/product";
+import { usePartnerStore } from "~/stores/partner";
 
 // stores
-const companyStore = useCompanyStore();
-const serviceStore = useServiceStore();
+const productStore = useProductStore();
 const partnerStore = usePartnerStore();
-await callOnce("company-data", () => companyStore.loadData());
-await callOnce("service-data", () => serviceStore.loadData());
+await callOnce("product-data", () => productStore.loadData());
 await callOnce("partner-data", () => partnerStore.loadData());
+
+// No additional variables needed as all data comes from the product store
 
 // SEO Meta
 useHead({
-  title: "Our Services - PT Nafitek Global Indonesia | Industrial Solutions",
+  title: "Our Products - PT Nafitek Global Indonesia | Industrial Components",
   meta: [
     {
       name: "description",
       content:
-        "Comprehensive industrial services including component supply, special purpose machines, maintenance & repair, automation services, and brand distribution. Expert solutions for your industrial needs.",
+        "High-quality industrial components and parts including vacuum solutions, tools, electronics, mechanical parts, and automation solutions for various industries.",
     },
     {
       name: "keywords",
       content:
-        "industrial services, component supply, special purpose machines, maintenance repair, automation services, vacuum pumps, PLC programming, Atlas Copco, Trusco distributor",
+        "industrial components, vacuum parts, tools supply, electronics parts, mechanical parts, automation solutions, industrial equipment",
     },
     {
       property: "og:title",
-      content: "Industrial Services - PT Nafitek Global Indonesia",
+      content:
+        "Our Products - PT Nafitek Global Indonesia | Industrial Components",
     },
     {
       property: "og:description",
       content:
-        "Complete industrial solutions including machinery procurement, maintenance, automation, and brand distribution services.",
+        "High-quality industrial components and parts for various industries, ensuring optimal performance and longevity of equipment.",
     },
     {
       property: "og:image",
@@ -265,6 +275,27 @@ useHead({
     },
   ],
 });
-
-// Structured Data will be added later when SEO module is configured
 </script>
+
+<style scoped>
+.text-gradient {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(12deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(12deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+</style>
