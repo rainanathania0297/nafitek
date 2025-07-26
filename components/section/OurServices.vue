@@ -34,7 +34,7 @@
             :image="service.image"
             :overview="service.overview"
             :feature_list="service.feature_list"
-            :cta_link="`/services#${service.slug}`"
+            :cta_link="`/services?#${service.slug}`"
             :style="{ animationDelay: `${index * 0.1}s` }"
           />
         </div>

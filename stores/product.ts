@@ -3,7 +3,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
-export interface NameParts {
+export interface ProductNameParts {
   name: string;
   rest: string;
 }
@@ -11,7 +11,7 @@ export interface Product {
   id: string;
   number: number;
   name: string;
-  nameParts: NameParts;
+  nameParts: ProductNameParts;
   slug: string;
   description: string;
   icon: string;
@@ -32,7 +32,7 @@ export const useProductStore = defineStore('product', () => {
   const pinnedProductList = computed(() => productList.value.filter((product: Product) => product.pinned).sort((a: Product, b: Product) => a.number - b.number));
   const unpinnedProductList = computed(() => productList.value.filter((product: Product) => !product.pinned).sort((a: Product, b: Product) => a.number - b.number));
 
-  function splitProductName(name: string) : NameParts {
+  function splitProductName(name: string) : ProductNameParts {
     const boldWords = [
       'Parts Supply',
       'Parts Solutions',
@@ -45,7 +45,7 @@ export const useProductStore = defineStore('product', () => {
         return {
           name: result,
           rest: suffix,
-        } as NameParts;
+        } as ProductNameParts;
       }
     }
 
@@ -55,9 +55,9 @@ export const useProductStore = defineStore('product', () => {
       return {
         name: words.slice(0, -1).join(' '),
         rest: words[words.length - 1],
-      } as NameParts;
+      } as ProductNameParts;
     }
-    return { name: name, rest: '' } as NameParts; // fallback if only one word
+    return { name: name, rest: '' } as ProductNameParts; // fallback if only one word
   }
   
   function mapProduct(product: any) {

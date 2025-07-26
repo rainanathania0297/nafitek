@@ -3,7 +3,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
-export interface NameParts {
+export interface ServiceNameParts {
   name: string;
   rest: string;
 }
@@ -18,7 +18,7 @@ export interface Service {
   number: number;
   pinned: boolean;
   name: string;
-  nameParts: NameParts;
+  nameParts: ServiceNameParts;
   icon: string;
   image: string;
   overview: string;
@@ -34,7 +34,7 @@ export const useServiceStore = defineStore('service', () => {
   const pinnedServiceList = computed(() => serviceList.value.filter((service: Service) => service.pinned).sort((a: Service, b: Service) => a.number - b.number));
   const unpinnedServiceList = computed(() => serviceList.value.filter((service: Service) => !service.pinned).sort((a: Service, b: Service) => a.number - b.number));
 
-  function splitProductName(name: string) : NameParts {
+  function splitProductName(name: string) : ServiceNameParts {
     const boldWords = [
       'Maintenance & Repair',
       'Specialists'
@@ -45,7 +45,7 @@ export const useServiceStore = defineStore('service', () => {
         return {
           name: result,
           rest: suffix,
-        } as NameParts;
+        } as ServiceNameParts;
       }
     }
 
@@ -55,9 +55,9 @@ export const useServiceStore = defineStore('service', () => {
       return {
         name: words.slice(0, -1).join(' '),
         rest: words[words.length - 1],
-      } as NameParts;
+      } as ServiceNameParts;
     }
-    return { name: name, rest: '' } as NameParts; // fallback if only one word
+    return { name: name, rest: '' } as ServiceNameParts; // fallback if only one word
   }
 
   function mapService(service: any) {
@@ -104,6 +104,7 @@ export const useServiceStore = defineStore('service', () => {
     serviceList,
     pinnedServiceList,
     unpinnedServiceList,
+    isLoading,
     loadData,
   };
 });
