@@ -488,7 +488,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Contact PT Nafitek Global Indonesia for industrial services, machinery maintenance, automation solutions. 24/7 emergency support available. Get your free quote today.'
+      content: 'Contact PT Nafitek Global Indonesia for industrial services, machinery maintenance, automation solutions. emergency support available. Get your free quote today.'
     },
     {
       name: 'keywords',

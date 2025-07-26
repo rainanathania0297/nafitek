@@ -36,9 +36,7 @@
             class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8 animate-fade-in-up"
             style="animation-delay: 0.2s"
           >
-            Join {{ companyStore.companyStats?.client_statisfaction }}+
-            satisfied clients who trust PT Nafitek Global Indonesia for their
-            machinery procurement, maintenance, and automation needs.
+          PT Nafitek Global Indonesia helps you streamline operations with the right machinery and automation.
           </p>
         </div>
 
@@ -112,11 +110,11 @@
               <h3
                 class="text-xl font-montserrat font-bold text-white mb-4 group-hover:text-golden transition-colors duration-300"
               >
-                24/7 Emergency Support
+                Emergency Support
               </h3>
               <p class="text-gray-300 mb-6 leading-relaxed">
                 Critical equipment failure? Our emergency response team is
-                available 24/7 to minimize your downtime.
+                available to minimize your downtime.
               </p>
               <a
                 href="tel:+622122157327"
