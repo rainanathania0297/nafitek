@@ -33,6 +33,7 @@ build-production:
   only:
     - production
     - v1
+    - v1.5/adjustment
 
 .template-deploy:
   stage: deploy
@@ -53,6 +54,7 @@ build-production:
   only:
     - production
     - v1
+    - v1.5/adjustment
 
 .script-deploy: &script-deploy
   - ln -sfT $(pwd)/.output/public ~/dist

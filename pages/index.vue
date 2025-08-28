@@ -103,7 +103,7 @@
     <!-- <HomePortofolioSection /> -->
 
     <!-- CTA Section -->
-    <HomeCTASection />
+    <!-- <HomeCTASection /> -->
   </div>
 </template>
 

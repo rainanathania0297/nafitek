@@ -130,7 +130,8 @@
             <h2
               class="text-4xl md:text-5xl font-montserrat font-bold text-white mb-6"
             >
-              {{ product.nameParts.name }} <span class="text-gradient">{{ product.nameParts.rest }}</span>
+              {{ product.nameParts.name }}
+              <span class="text-gradient">{{ product.nameParts.rest }}</span>
             </h2>
             <div class="w-24 h-1 bg-golden mb-6"></div>
 
@@ -194,9 +195,8 @@
     <!-- Additional sections are now generated dynamically in the loop above -->
 
     <!-- CTA Section -->
-    <section class="py-20 bg-gradient-industrial relative overflow-hidden">
+    <!-- <section class="py-20 bg-gradient-industrial relative overflow-hidden">
       <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
-
       <div class="container mx-auto px-4 lg:px-8">
         <div
           class="text-center mt-16 animate-fade-in-up"
@@ -228,7 +228,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
