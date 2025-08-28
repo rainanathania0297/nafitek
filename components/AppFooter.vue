@@ -19,11 +19,11 @@
             </div>
           </div>
           
-          <p class="text-gray-300 mb-6 max-w-md leading-relaxed">
+          <!-- <p class="text-gray-300 mb-6 max-w-md leading-relaxed">
             Your trusted partner for high-quality machinery procurement, maintenance, 
             and repair services since {{ companyStore.companyStats.year_established }}. We deliver exceptional value through 
             innovative solutions and professional expertise.
-          </p>
+          </p> -->
           
           <!-- Contact Info -->
           <div class="space-y-3">

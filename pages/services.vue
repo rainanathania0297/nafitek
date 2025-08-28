@@ -133,7 +133,7 @@
                     name="heroicons:check-circle"
                     class="w-5 h-5 text-golden flex-shrink-0"
                   />
-                  <NuxtImg
+                  <!-- <NuxtImg
                     v-if="brand.image"
                     :preset="brand.image.includes('.svg') ? undefined : 'brand'"
                     :src="brand.image"
@@ -141,7 +141,8 @@
                     class="w-auto h-8 filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
                     loading="lazy"
                   />
-                  <span v-else class="text-gray-300">{{ brand.name }}</span>
+                  <span v-else class="text-gray-300">{{ brand.name }}</span> -->
+                  <span class="text-gray-300">{{ brand.name }}</span>
                 </div>
               </div>
             </div>
@@ -187,9 +188,8 @@
     </SectionProcessTimelineImage>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-charcoal relative overflow-hidden">
+    <!-- <section class="py-20 bg-charcoal relative overflow-hidden">
       <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-5"></div>
-
       <div class="container mx-auto px-4 lg:px-8">
         <div
           class="text-center mt-16 animate-fade-in-up"
@@ -221,7 +221,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 

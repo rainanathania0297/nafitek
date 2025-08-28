@@ -23,16 +23,16 @@
     <div class="relative z-20 container mx-auto px-4 lg:px-8 text-center">
       <div class="max-w-5xl mx-auto">
         <!-- Animated Title -->
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-montserrat font-bold text-white mb-6 leading-tight">
+        <!-- <h1 class="text-5xl md:text-6xl lg:text-7xl font-montserrat font-bold text-white mb-6 leading-tight">
           <span class="block animate-fade-in-up">Nafitek</span>
           <span class="block text-gradient animate-fade-in-up" style="animation-delay: 0.2s">Global</span>
           <span class="block animate-fade-in-up" style="animation-delay: 0.4s">Indonesia</span>
-        </h1>
+        </h1> -->
 
         <!-- Subtitle -->
         <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.6s">
           Your trusted provider industrial trading in electric or mechanic and machinery, 
-          procurement, vacuum industry specialize, automation solution and maintenance services.
+          vacuum industry specialize, automation solution and maintenance services.
         </p>
 
         <!-- Key Stats -->

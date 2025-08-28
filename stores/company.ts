@@ -89,6 +89,8 @@ export const useCompanyStore = defineStore("company", () => {
       return;
     }
 
+    const year_established = companyDataSource?.year_established
+    const year_experience = new Date().getFullYear() - year_established
     companyData.value = {
       name: companyDataSource?.name,
       address: companyDataSource?.address as CompanyAddress,
@@ -99,7 +101,7 @@ export const useCompanyStore = defineStore("company", () => {
       mission: companyDataSource?.mission as string[],
       stats: {
         year_established: companyDataSource?.year_established,
-        year_experience: new Date().getFullYear() - companyDataSource?.year_established,
+        year_experience: year_experience,
         client_total: companyDataSource?.client_total,
         client_statisfaction: companyDataSource?.client_statisfaction,
         project_total: companyDataSource?.project_total,
@@ -118,12 +120,19 @@ export const useCompanyStore = defineStore("company", () => {
         ),
       } as CompanyStats,
       strengths: companyDataSource?.strengths.map((strength: any) => {
+        const features = strength.features.map((feat: String) => {
+          if (feat.includes("{year_experience}")) {
+            return feat.replace("{year_experience}", year_experience.toString())
+          } else {
+            return feat
+          }
+        })
         return {
           number: strength.number,
           icon: strength.icon,
           name: strength.name,
           description: strength.description,
-          features: strength.features || [],
+          features: features || [],
         } as CompanyStrengths;
       }),
       processes: {
