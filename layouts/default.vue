@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-charcoal">
+  <div class="min-h-screen bg-white dark:bg-charcoal transition-colors duration-300">
     <!-- Accessibility Skip Links -->
     <AccessibilitySkipLink />
     

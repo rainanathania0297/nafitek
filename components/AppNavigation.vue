@@ -3,9 +3,9 @@
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     :class="[
       isScrolled
-        ? 'bg-charcoal/95 backdrop-blur-md shadow-lg'
+        ? 'bg-white/95 dark:bg-charcoal/95 backdrop-blur-md shadow-lg'
         : 'bg-transparent',
-      'border-b border-gray-700/50',
+      'border-b border-gray-200/50 dark:border-gray-700/50',
     ]"
   >
     <div class="container mx-auto px-4 lg:px-8">
@@ -19,7 +19,7 @@
             loading="eager"
           />
           <div class="hidden md:block">
-            <h1 class="text-xl font-montserrat font-bold text-white">
+            <h1 class="text-xl font-montserrat font-bold text-gray-900 dark:text-white">
               PT Nafitek Global
             </h1>
             <p class="text-sm text-golden">
@@ -34,7 +34,7 @@
             v-for="item in navigationItems"
             :key="item.name"
             :to="item.href"
-            class="relative text-white hover:text-golden transition-colors duration-300 font-medium group"
+            class="relative text-gray-900 dark:text-white hover:text-golden transition-colors duration-300 font-medium group"
             @click="closeMenu"
           >
             {{ item.name }}
@@ -42,6 +42,9 @@
               class="absolute bottom-0 left-0 w-0 h-0.5 bg-golden transition-all duration-300 group-hover:w-full"
             ></span>
           </NuxtLink>
+
+          <!-- Theme Switcher -->
+          <ThemeSwitcher />
 
           <!-- CTA Button -->
           <NuxtLink to="/contact" class="btn-primary ml-4" @click="closeMenu">
@@ -56,15 +59,15 @@
           :class="{ open: isMenuOpen }"
         >
           <span
-            class="block w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-golden"
+            class="block w-6 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300 group-hover:bg-golden"
             :class="{ 'rotate-45 translate-y-2': isMenuOpen }"
           ></span>
           <span
-            class="block w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-golden"
+            class="block w-6 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300 group-hover:bg-golden"
             :class="{ 'opacity-0': isMenuOpen }"
           ></span>
           <span
-            class="block w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-golden"
+            class="block w-6 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300 group-hover:bg-golden"
             :class="{ '-rotate-45 -translate-y-2': isMenuOpen }"
           ></span>
         </button>
@@ -83,9 +86,9 @@
           v-if="isMenuOpen"
           :class="[
             isScrolled
-              ? 'bg-charcoal/95 backdrop-blur-md'
-              : 'backdrop-blur-md',
-            'lg:hidden absolute top-full left-0 right-0 border-b border-gray-700/50 shadow-xl',
+              ? 'bg-white/95 dark:bg-charcoal/95 backdrop-blur-md'
+              : 'bg-white/90 dark:bg-charcoal/90 backdrop-blur-md',
+            'lg:hidden absolute top-full left-0 right-0 border-b border-gray-200/50 dark:border-gray-700/50 shadow-xl',
           ]"
         >
           <div class="container mx-auto px-4 py-6">
@@ -94,11 +97,17 @@
                 v-for="item in navigationItems"
                 :key="item.name"
                 :to="item.href"
-                class="text-white hover:text-golden transition-colors duration-300 font-medium py-2 border-b border-gray-700/30 last:border-b-0"
+                class="text-gray-900 dark:text-white hover:text-golden transition-colors duration-300 font-medium py-2 border-b border-gray-200/30 dark:border-gray-700/30 last:border-b-0"
                 @click="closeMenu"
               >
                 {{ item.name }}
               </NuxtLink>
+
+              <!-- Mobile Theme Switcher -->
+              <div class="flex items-center justify-between py-2 border-b border-gray-200/30 dark:border-gray-700/30">
+                <span class="text-gray-900 dark:text-white font-medium">Theme</span>
+                <ThemeSwitcher />
+              </div>
 
               <NuxtLink
                 to="/contact"
