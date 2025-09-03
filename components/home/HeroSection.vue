@@ -2,21 +2,22 @@
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Background Video/Image -->
     <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-overlay z-10"></div>
+      <!-- Light mode overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-white/95 via-gray-50/90 to-white/95 dark:bg-gradient-overlay z-10"></div>
       <div 
         class="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
       ></div>
       <!-- Industrial Grid Pattern -->
-      <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-20 z-5"></div>
+      <div class="absolute inset-0 bg-industrial-grid bg-grid opacity-20 dark:opacity-20 opacity-10 z-5"></div>
     </div>
 
     <!-- Floating Geometric Elements -->
     <div class="absolute inset-0 z-5">
-      <div class="absolute top-20 left-10 w-20 h-20 border-2 border-golden/30 rotate-45 animate-float"></div>
-      <div class="absolute top-40 right-20 w-16 h-16 bg-golden/20 rotate-12 animate-float" style="animation-delay: 1s"></div>
-      <div class="absolute bottom-40 left-20 w-12 h-12 border border-golden/40 rounded-full animate-pulse-slow"></div>
-      <div class="absolute bottom-20 right-10 w-24 h-24 border-2 border-golden/20 rotate-45 animate-float" style="animation-delay: 2s"></div>
+      <div class="absolute top-20 left-10 w-20 h-20 border-2 border-golden/50 dark:border-golden/30 rotate-45 animate-float"></div>
+      <div class="absolute top-40 right-20 w-16 h-16 bg-golden/30 dark:bg-golden/20 rotate-12 animate-float" style="animation-delay: 1s"></div>
+      <div class="absolute bottom-40 left-20 w-12 h-12 border border-golden/60 dark:border-golden/40 rounded-full animate-pulse-slow"></div>
+      <div class="absolute bottom-20 right-10 w-24 h-24 border-2 border-golden/40 dark:border-golden/20 rotate-45 animate-float" style="animation-delay: 2s"></div>
     </div>
 
     <!-- Main Content -->
@@ -30,7 +31,7 @@
         </h1> -->
 
         <!-- Subtitle -->
-        <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.6s">
+        <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.6s">
           Your trusted provider industrial trading in electric or mechanic and machinery, 
           vacuum industry specialize, automation solution and maintenance services.
         </p>
@@ -76,17 +77,17 @@
     <!-- Scroll Indicator -->
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in-up" style="animation-delay: 1.2s">
       <div class="flex flex-col items-center cursor-pointer group" @click="scrollToNext">
-        <div class="w-6 h-10 border-2 border-golden rounded-full flex justify-center group-hover:border-white transition-colors duration-300">
-          <div class="w-1 h-3 bg-golden rounded-full mt-2 animate-bounce group-hover:bg-white transition-colors duration-300"></div>
+        <div class="w-6 h-10 border-2 border-golden rounded-full flex justify-center group-hover:border-gray-800 dark:group-hover:border-white transition-colors duration-300">
+          <div class="w-1 h-3 bg-golden rounded-full mt-2 animate-bounce group-hover:bg-gray-800 dark:group-hover:bg-white transition-colors duration-300"></div>
         </div>
-        <span class="text-golden text-sm mt-2 opacity-75 group-hover:opacity-100 group-hover:text-white transition-all duration-300">
+        <span class="text-golden text-sm mt-2 opacity-75 group-hover:opacity-100 group-hover:text-gray-800 dark:group-hover:text-white transition-all duration-300">
           Scroll Down
         </span>
       </div>
     </div>
 
     <!-- Rotating Gear Element -->
-    <div class="absolute bottom-10 right-10 w-20 h-20 opacity-20 animate-rotate-gear">
+    <div class="absolute bottom-10 right-10 w-20 h-20 opacity-20 dark:opacity-20 opacity-30 animate-rotate-gear">
       <Icon name="mdi:cog" class="w-full h-full text-golden" />
     </div>
 
