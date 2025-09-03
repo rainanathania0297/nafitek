@@ -108,16 +108,25 @@
             © {{ currentYear }} PT Nafitek Global Indonesia. All rights reserved.
           </div>
           
-          <div class="flex items-center space-x-6 text-sm">
-            <NuxtLink to="/privacy" class="text-gray-400 hover:text-golden transition-colors">
-              Privacy Policy
-            </NuxtLink>
-            <NuxtLink to="/terms" class="text-gray-400 hover:text-golden transition-colors">
-              Terms of Service
-            </NuxtLink>
-            <NuxtLink to="/sitemap" class="text-gray-400 hover:text-golden transition-colors">
-              Sitemap
-            </NuxtLink>
+          <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <!-- Theme Switcher -->
+            <div class="flex items-center space-x-2">
+              <span class="text-gray-400 text-sm">Theme:</span>
+              <ThemeSwitcher />
+            </div>
+            
+            <!-- Legal Links -->
+            <div class="flex items-center space-x-6 text-sm">
+              <NuxtLink to="/privacy" class="text-gray-400 hover:text-golden transition-colors">
+                Privacy Policy
+              </NuxtLink>
+              <NuxtLink to="/terms" class="text-gray-400 hover:text-golden transition-colors">
+                Terms of Service
+              </NuxtLink>
+              <NuxtLink to="/sitemap" class="text-gray-400 hover:text-golden transition-colors">
+                Sitemap
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>

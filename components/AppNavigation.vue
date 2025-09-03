@@ -43,9 +43,6 @@
             ></span>
           </NuxtLink>
 
-          <!-- Theme Switcher -->
-          <ThemeSwitcher />
-
           <!-- CTA Button -->
           <NuxtLink to="/contact" class="btn-primary ml-4" @click="closeMenu">
             Get Quote
@@ -103,11 +100,7 @@
                 {{ item.name }}
               </NuxtLink>
 
-              <!-- Mobile Theme Switcher -->
-              <div class="flex items-center justify-between py-2 border-b border-gray-200/30 dark:border-gray-700/30">
-                <span class="text-gray-900 dark:text-white font-medium">Theme</span>
-                <ThemeSwitcher />
-              </div>
+
 
               <NuxtLink
                 to="/contact"
