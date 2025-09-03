@@ -46,6 +46,15 @@
               </a>
             </div>
           </div>
+          
+          <!-- Theme Switcher -->
+          <div class="mt-6 pt-6 border-t border-gray-700">
+            <div class="flex items-center space-x-3">
+              <Icon name="mdi:palette" class="text-golden w-5 h-5" />
+              <span class="text-gray-300 text-sm">Theme:</span>
+              <ThemeSwitcher />
+            </div>
+          </div>
         </div>
 
         <!-- Quick Links -->
@@ -108,25 +117,17 @@
             © {{ currentYear }} PT Nafitek Global Indonesia. All rights reserved.
           </div>
           
-          <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <!-- Theme Switcher -->
-            <div class="flex items-center space-x-2">
-              <span class="text-gray-400 text-sm">Theme:</span>
-              <ThemeSwitcher />
-            </div>
-            
-            <!-- Legal Links -->
-            <div class="flex items-center space-x-6 text-sm">
-              <NuxtLink to="/privacy" class="text-gray-400 hover:text-golden transition-colors">
-                Privacy Policy
-              </NuxtLink>
-              <NuxtLink to="/terms" class="text-gray-400 hover:text-golden transition-colors">
-                Terms of Service
-              </NuxtLink>
-              <NuxtLink to="/sitemap" class="text-gray-400 hover:text-golden transition-colors">
-                Sitemap
-              </NuxtLink>
-            </div>
+          <!-- Legal Links -->
+          <div class="flex items-center space-x-6 text-sm">
+            <NuxtLink to="/privacy" class="text-gray-400 hover:text-golden transition-colors">
+              Privacy Policy
+            </NuxtLink>
+            <NuxtLink to="/terms" class="text-gray-400 hover:text-golden transition-colors">
+              Terms of Service
+            </NuxtLink>
+            <NuxtLink to="/sitemap" class="text-gray-400 hover:text-golden transition-colors">
+              Sitemap
+            </NuxtLink>
           </div>
         </div>
       </div>
